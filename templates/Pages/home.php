@@ -67,8 +67,9 @@ $cakeDescription = 'CakePHP: the rapid development PHP framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <?= $this->fetch('script2') ?>
 </head>
-<body>
+<body>  
     <header>
         <div class="container text-center">
             <a href="https://cakephp.org/" target="_blank" rel="noopener">

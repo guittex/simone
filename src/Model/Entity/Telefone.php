@@ -6,12 +6,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Cliente Entity
+ * Telefone Entity
  *
  * @property int $id
- * @property string|null $nome
+ * @property string|null $tipo_telefone
+ * @property string|null $numero
+ * @property int|null $deleted
+ * @property \Cake\I18n\FrozenTime|null $created
+ * @property \Cake\I18n\FrozenTime|null $modified
+ * @property int|null $cliente_id
+ *
+ * @property \App\Model\Entity\Cliente $cliente
  */
-class Cliente extends Entity
+class Telefone extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -23,14 +30,12 @@ class Cliente extends Entity
      * @var array
      */
     protected $_accessible = [
-        'nome' => true,
-        'rg' => true,
-        'cpf' => true,
-        'cnh' => true,
-        'data_nascimento' => true,
-        'sexo' => true,
-        'estado_civil' => true,
+        'tipo_telefone' => true,
+        'numero' => true,
+        'deleted' => true,
         'created' => true,
-        'modified' => true        
+        'modified' => true,
+        'cliente_id' => true,
+        'cliente' => true,
     ];
 }

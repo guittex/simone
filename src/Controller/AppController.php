@@ -18,6 +18,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
+use DataTables\Controller\Component\DataTablesComponent;
 
 /**
  * Application Controller
@@ -44,6 +45,7 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('DataTables.DataTables');
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.

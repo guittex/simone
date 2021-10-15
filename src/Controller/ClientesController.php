@@ -33,10 +33,44 @@ class ClientesController extends AppController
     public function view($id = null)
     {
         $cliente = $this->Clientes->get($id, [
-            'contain' => [],
+            'contain' => [
+                'Telefones'
+            ],
         ]);
 
-        $this->set(compact('cliente'));
+        $telefone = $this->loadModel('Telefones')->newEmptyEntity();
+
+        $endereco = $this->loadModel('Enderecos')->newEmptyEntity();
+
+        $this->set(compact('cliente', 'telefone', 'endereco'));
+    }
+
+    /**
+     * Adicionar um telefone a partir da visualização do cliente
+     *
+     * @param string|null $id Cliente id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+    */
+    public function addTelefoneInCliente($id)
+    {
+        if ($this->request->is('post')) {
+            $post = $this->getRequest()->getData();
+
+            $telefone = $this->loadModel('Telefones')->newEmptyEntity();
+
+            $telefone = $this->loadModel('Telefones')->patchEntity($telefone, $this->request->getData());
+
+            if ($this->loadModel('Telefones')->save($telefone)) {
+                $this->Flash->success(__('Telefone adicionado com sucesso'));
+
+            }else{
+                $this->Flash->error(__('Erro ao adicionar Telefone'));
+
+            }
+            return $this->redirect(['action' => 'view', $id]);
+
+        }
     }
 
 
@@ -51,11 +85,11 @@ class ClientesController extends AppController
         if ($this->request->is('post')) {
             $cliente = $this->Clientes->patchEntity($cliente, $this->request->getData());
             if ($this->Clientes->save($cliente)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Cliente'));
+                $this->Flash->success(__('Cliente adicionado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Cliente'));
+            $this->Flash->error(__('Erro ao adicionar cliente'));
         }
         $this->set(compact('cliente'));
     }
@@ -76,11 +110,11 @@ class ClientesController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $cliente = $this->Clientes->patchEntity($cliente, $this->request->getData());
             if ($this->Clientes->save($cliente)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Cliente'));
+                $this->Flash->success(__('Cliente editado com sucesso'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $id]);
             }
-            $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Cliente'));
+            $this->Flash->error(__('Erro ao editar cliente'));
         }
         $this->set(compact('cliente'));
     }

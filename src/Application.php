@@ -48,6 +48,7 @@ class Application extends BaseApplication
         parent::bootstrap();
 
         $this->addPlugin('AdminLTE');
+        $this->addPlugin('DataTables');
 
         if (PHP_SAPI === 'cli') {
             $this->bootstrapCli();
@@ -94,8 +95,9 @@ class Application extends BaseApplication
             // creating the middleware instance specify the cache config name by
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
-            ->add(new RoutingMiddleware($this))
+            ->add(new RoutingMiddleware($this, '_cake_routes_'))
 
+            
             // Parse various types of encoded request bodies so that they are
             // available as array through $request->getData()
             // https://book.cakephp.org/4/en/controllers/middleware.html#body-parser-middleware

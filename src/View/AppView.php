@@ -16,6 +16,7 @@ declare(strict_types=1);
 namespace App\View;
 
 use Cake\View\View;
+use DataTables\View\Helper\DataTablesHelper;
 
 /**
  * Application View
@@ -37,6 +38,7 @@ class AppView extends View
      */
     public function initialize(): void
     {
+        $this->loadHelper('DataTables.DataTables');
         $this->loadHelper('Form', ['className' => 'AdminLTE.Form']);
     }
 }

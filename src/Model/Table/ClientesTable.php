@@ -37,6 +37,12 @@ class ClientesTable extends Table
     {
         parent::initialize($config);
 
+        $this->addBehavior('Timestamp');
+
+        $this->hasMany('Telefones', [
+            'foreignKey' => 'cliente_id'
+        ]);
+
         $this->setTable('clientes');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');

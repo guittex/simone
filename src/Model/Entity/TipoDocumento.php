@@ -6,12 +6,14 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Cliente Entity
+ * TipoDocumento Entity
  *
  * @property int $id
  * @property string|null $nome
+ * @property \Cake\I18n\FrozenTime|null $created
+ * @property \Cake\I18n\FrozenTime|null $modified
  */
-class Cliente extends Entity
+class TipoDocumento extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -24,13 +26,7 @@ class Cliente extends Entity
      */
     protected $_accessible = [
         'nome' => true,
-        'rg' => true,
-        'cpf' => true,
-        'cnh' => true,
-        'data_nascimento' => true,
-        'sexo' => true,
-        'estado_civil' => true,
         'created' => true,
-        'modified' => true        
+        'modified' => true,
     ];
 }
