@@ -54,7 +54,7 @@ use App\Model\Entity\Endereco;
                     <?= $this->Form->control('cpf',[
                       'value' => $cliente->cpf,
                       'label' => 'CPF',
-                      'class' => 'form-control'
+                      'class' => 'form-control cpf'
                     ]) ?>
                   </div>
                   <div class="col-md-4">
@@ -144,8 +144,9 @@ use App\Model\Entity\Endereco;
                     </div>
                     <div class="col-md-4">
                       <?= $this->Form->control('numero',[
-                        'class' => 'form-control',
+                        'class' => 'form-control numeroMask',
                         'label' => 'Número',
+                        'disabled' => true,
                         'value' => '',
                         'placeholder' => 'Digite...',
                       ]) ?>
@@ -164,6 +165,7 @@ use App\Model\Entity\Endereco;
                           <th>Tipo de Telefone</th>
                           <th>Número</th>
                           <th>Criado</th>
+                          <th>Ações</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -173,6 +175,14 @@ use App\Model\Entity\Endereco;
                           <td><?= ucfirst(h($telefone->tipo_telefone)) ?></td>
                           <td><?= h($telefone->numero) ?></td>
                           <td><?= date_format($telefone->created, 'd/m/Y H:i') ?></td>
+                          <td style='width:80px'>
+                            <div class="col-md-12">
+                              <button class="btn btn-xs btn-warning btn-flat" style="width:48px">Editar</button>
+                            </div>
+                            <div class="col-md-12">
+                              <button class="btn btn-xs btn-danger btn-flat">Deletar</button>
+                            </div>
+                          </td>
                         </tr>
                         <?php endforeach; ?>
                       </tbody>
@@ -189,9 +199,13 @@ use App\Model\Entity\Endereco;
                       ],
                       'type' => 'post'
                     ]) ?>
+
+                    <!-- Hidden Inputs -->
+                    <input type='hidden' name='cliente_id' value=<?= $cliente->id ?>>
+
                     <div class="col-md-3">
                       <?= $this->Form->control("cep",[
-                        'class' => 'form-control',
+                        'class' => 'form-control cep',
                         'label' => 'CEP',
                         'placeholder' => 'Digite...'
                       ]) ?>
@@ -257,7 +271,34 @@ use App\Model\Entity\Endereco;
                   </div>
                   <div class="box-footer m-t-15 m-b-15">
                     <table class="table table_data">
-
+                        <thead>
+                          <tr>
+                            <th>order</th>
+                            <th>Logradouro</th>
+                            <th>Número</th>
+                            <th>Bairro</th>
+                            <th>Cidade</th>
+                            <th>Ações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <?php foreach($enderecosCliente as $key => $endereco) : ?>
+                          <tr>
+                            <td><?= $key ?></td>
+                            <td><?= $endereco->logradouro ?></td>
+                            <td><?= $endereco->numero ?></td>
+                            <td><?= $endereco->bairro ?></td>
+                            <td><?= $endereco->cidade ?></td>
+                            <td style='width:80px'>
+                              <div class="col-md-12">
+                                <button class="btn btn-xs btn-warning btn-flat" style="width:48px">Editar</button>
+                              </div>
+                              <div class="col-md-12">
+                                <button class="btn btn-xs btn-danger btn-flat">Deletar</button>
+                              </div>
+                            </td>                          </tr>
+                          <?php endforeach; ?>
+                        </tbody>
                     </table>
                   </div>
               </div>
@@ -267,5 +308,21 @@ use App\Model\Entity\Endereco;
       </div>
     </div>
   </div>
-
 </section>
+<script>
+  $(document).ready(function(){
+    $("#tipo-telefone").on("change", function (){
+      $(".numeroMask").val('');
+      $(".numeroMask").removeAttr("disabled");
+
+      if($("#tipo-telefone").val() == 'celular'){
+        $(".numeroMask").mask("(99)99999-9999");
+
+      }else{
+        $(".numeroMask").mask("(99)9999-9999");
+
+      }
+    });
+
+  });
+</script>

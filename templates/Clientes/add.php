@@ -28,13 +28,72 @@
           <!-- form start -->
           <?php echo $this->Form->create($cliente, ['role' => 'form']); ?>
             <div class="box-body">
-              <?php
-                echo $this->Form->control('nome');
-              ?>
-            </div>
-            <!-- /.box-body -->
-
-          <?php echo $this->Form->submit(__('Adicionar'), ['class' => 'btn btn-flat btn-success float-r']); ?>
+              <div class="col-md-4">
+                <?= $this->Form->control('nome',[
+                  'placeholder' => 'Digite...',
+                  'class' => 'form-control'
+                ]) ?>
+              </div>
+              <div class="col-md-4">
+                <?= $this->Form->control('cpf',[
+                  'placeholder' => 'Digite...',
+                  'label' => 'CPF',
+                  'class' => 'form-control cpf'
+                ]) ?>
+              </div>
+              <div class="col-md-4">
+                  <?= $this->Form->control('rg',[
+                    'placeholder' => 'Digite...',
+                    'label' => 'RG',
+                    'class' => 'form-control'
+                  ]) ?>
+              </div>    
+              <div class="col-md-4">
+                <?= $this->Form->control('data_nascimento',[
+                    'placeholder' => 'Digite...',
+                    'label' => 'Data de Nascimento',
+                    'class' => 'form-control'
+                  ]) ?>
+              </div>    
+              <div class="col-md-4">
+                <?= $this->Form->control('cnh',[
+                    'placeholder' => 'Digite...',
+                    'label' => 'CNH',
+                    'class' => 'form-control'
+                  ]) ?>
+              </div>       
+              <div class="col-md-4">
+                <?= $this->Form->control('estado_civil',[
+                    'value' => $cliente->estado_civil,
+                    'label' => 'Estado Civíl',
+                    'empty' => 'Selecione...',
+                    'options' => [
+                      'solteiro' => 'Solteiro(a)',
+                      'casado' => 'Casado(a)',
+                      'divorciado' => 'Divorciado(a)',
+                      'viuvo' => 'Viúvo(a)',
+                      'sem_especificacao' => 'Não Divulgado'
+                    ],
+                    'class' => 'form-control select2'
+                  ]) ?>
+              </div>    
+              <div class="col-md-4">
+                <?= $this->Form->control('sexo',[
+                    'value' => $cliente->sexo,
+                    'label' => 'Sexo',
+                    'empty' => 'Selecione...',
+                    'options' => [
+                      'solteiro' => 'Masculino',
+                      'casado' => 'Feminino',
+                      'sem_especificacao' => 'Não Divulgado'
+                    ],
+                    'class' => 'form-control select2'
+                  ]) ?>            
+              </div>      
+            </div>   
+            <div class="box-footer">
+              <button class="btn btn-flat btn-success float-r" type='submit'>Adicionar</button>
+            </div>   
 
           <?php echo $this->Form->end(); ?>
         </div>

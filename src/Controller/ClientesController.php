@@ -34,7 +34,7 @@ class ClientesController extends AppController
     {
         $cliente = $this->Clientes->get($id, [
             'contain' => [
-                'Telefones'
+                'Telefones',
             ],
         ]);
 
@@ -42,11 +42,14 @@ class ClientesController extends AppController
 
         $endereco = $this->loadModel('Enderecos')->newEmptyEntity();
 
-        $this->set(compact('cliente', 'telefone', 'endereco'));
+        $enderecosCliente = $this->loadModel('Enderecos')->find("all")
+            ->where(['deleted' => 0]);
+
+        $this->set(compact('cliente', 'telefone', 'endereco', 'enderecosCliente'));
     }
 
     /**
-     * Adicionar um telefone a partir da visualização do cliente
+     * Adiciona um telefone a partir da visualização do cliente
      *
      * @param string|null $id Cliente id.
      * @return \Cake\Http\Response|null|void Renders view
@@ -55,8 +58,6 @@ class ClientesController extends AppController
     public function addTelefoneInCliente($id)
     {
         if ($this->request->is('post')) {
-            $post = $this->getRequest()->getData();
-
             $telefone = $this->loadModel('Telefones')->newEmptyEntity();
 
             $telefone = $this->loadModel('Telefones')->patchEntity($telefone, $this->request->getData());
@@ -73,6 +74,30 @@ class ClientesController extends AppController
         }
     }
 
+    /**
+     * Adiciona um endereco a partir da visualização do cliente
+     *
+     * @param string|null $id Cliente id.
+     * @return \Cake\Http\Response|null|void Renders view
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+    */
+    public function addEnderecoInCliente($id)
+    {
+        if ($this->request->is('post')) {          
+            $endereco = $this->loadModel('Enderecos')->newEmptyEntity();
+
+            $endereco = $this->loadModel('Enderecos')->patchEntity($endereco, $this->request->getData());
+
+            if ($this->loadModel('Enderecos')->save($endereco)) {
+                $this->Flash->success(__('Endereço adicionado com sucesso'));
+
+            }else{
+                $this->Flash->error(__('Erro ao adicionar Endereço'));
+
+            }
+            return $this->redirect(['action' => 'view', $id]);
+        }
+    }
 
     /**
      * Add method
@@ -82,15 +107,27 @@ class ClientesController extends AppController
     public function add()
     {
         $cliente = $this->Clientes->newEmptyEntity();
+
         if ($this->request->is('post')) {
+            $clienteChecker = $this->Clientes->find("all")->where(['cpf' => $this->getRequest()->getData('cpf')])->toArray();
+
+            if(count($clienteChecker) >= 1){
+                $this->Flash->error(__('Erro ao adicionar cliente, CPF informado já possui cadastro'));
+
+                return $this->redirect(['action' => 'add']);
+            }
+
             $cliente = $this->Clientes->patchEntity($cliente, $this->request->getData());
+            
             if ($this->Clientes->save($cliente)) {
                 $this->Flash->success(__('Cliente adicionado com sucesso'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $cliente->id]);
             }
+
             $this->Flash->error(__('Erro ao adicionar cliente'));
         }
+
         $this->set(compact('cliente'));
     }
 
