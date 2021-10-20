@@ -28,9 +28,18 @@
           <!-- form start -->
           <?php echo $this->Form->create($tipoDocumento, ['role' => 'form']); ?>
             <div class="box-body">
-              <?php
-                echo $this->Form->control('nome');
-              ?>
+              <div class="col-md-8">
+                <?= $this->Form->control('nome'); ?>
+              </div>
+              <div class="col-md-3">
+                <div class="pretty p-switch p-fill p-bigger m-t-35">
+                    <input type="checkbox" name="obrigatorio" />
+                    <div class="state p-success">
+                        <label>Documento Obrigatório</label>
+                    </div>
+                </div>
+                
+              </div>
             </div>
             <!-- /.box-body -->
 

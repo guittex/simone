@@ -28,5 +28,6 @@ class TipoDocumento extends Entity
         'nome' => true,
         'created' => true,
         'modified' => true,
+        'obrigatorio' => true,
     ];
 }

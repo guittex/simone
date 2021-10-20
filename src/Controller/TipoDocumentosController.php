@@ -48,8 +48,16 @@ class TipoDocumentosController extends AppController
     public function add()
     {
         $tipoDocumento = $this->TipoDocumentos->newEmptyEntity();
+
         if ($this->request->is('post')) {
-            $tipoDocumento = $this->TipoDocumentos->patchEntity($tipoDocumento, $this->request->getData());
+            $post = $this->request->getData();
+
+            if(isset($post['obrigatorio'])){
+                $post['obrigatorio'] = 1;
+            }
+
+            $tipoDocumento = $this->TipoDocumentos->patchEntity($tipoDocumento, $post);
+
             if ($this->TipoDocumentos->save($tipoDocumento)) {
                 $this->Flash->success(__('Tipo de Documento adicionado com sucesso'));
 
@@ -57,6 +65,7 @@ class TipoDocumentosController extends AppController
             }
             $this->Flash->error(__('Erro ao adicionar Tipo de Documento'));
         }
+        
         $this->set(compact('tipoDocumento'));
     }
 
