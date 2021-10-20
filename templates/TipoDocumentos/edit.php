@@ -8,10 +8,10 @@
   <section class="content-header">
     <h1>
       Tipo Documento
-      <small><?php echo __('Edit'); ?></small>
+      <small><?php echo __('Edição'); ?></small>
     </h1>
     <ol class="breadcrumb">
-      <li><a href="<?php echo $this->Url->build(['action' => 'index']); ?>"><i class="fa fa-dashboard"></i> <?php echo __('Home'); ?></a></li>
+      <li><a href="<?php echo $this->Url->build(['action' => 'index']); ?>" style="font-size:20px"><i class="fa fa-arrow-left" style="color:#03a9f4"></i> <?php echo __('Voltar'); ?></a></li>
     </ol>
   </section>
 
@@ -22,7 +22,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title"><?php echo __('Form'); ?></h3>
+            <h3 class="box-title"><?php echo __('Formulário'); ?></h3>
           </div>
           <!-- /.box-header -->
           <!-- form start -->
@@ -32,10 +32,10 @@
                 echo $this->Form->control('nome');
               ?>
             </div>
+            <div class="box-footer">
+              <button type="submit" class="btn btn-flat btn-success btn-flat float-r">Editar</button>
+            </div>
             <!-- /.box-body -->
-
-          <?php echo $this->Form->submit(__('Submit')); ?>
-
           <?php echo $this->Form->end(); ?>
         </div>
         <!-- /.box -->

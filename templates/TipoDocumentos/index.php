@@ -33,7 +33,7 @@
                   <td><?= h($tipoDocumento->nome) ?></td>
                   <td><?= date_format($tipoDocumento->created, 'd/m/Y H:i') ?></td>
                   <td class="actions text-right">
-                      <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $tipoDocumento->id], ['class'=>'btn btn-flat btn-info btn-xs']) ?>
+                      <!-- </?= $this->Html->link(__('Visualizar'), ['action' => 'view', $tipoDocumento->id], ['class'=>'btn btn-flat btn-info btn-xs']) ?> -->
                       <?= $this->Html->link(__('Editar'), ['action' => 'edit', $tipoDocumento->id], ['class'=>'btn btn-flat btn-warning btn-xs']) ?>
                       <?= $this->Form->postLink(__('Deletar'), ['action' => 'delete', $tipoDocumento->id], ['confirm' => __('Tem certeza que deseja deletar?'), 'class'=>'btn btn-flat btn-danger btn-xs']) ?>
                   </td>
