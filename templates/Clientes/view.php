@@ -8,7 +8,7 @@ use App\Model\Entity\Endereco;
     <small><?php echo __('Visualização'); ?></small>
   </h1>
   <ol class="breadcrumb">
-    <li><a href="<?php echo $this->Url->build(['action' => 'index']); ?>" style="font-size:20px"><i class="fa fa-arrow-left"></i> <?php echo __('Voltar'); ?></a></li>
+    <li><a href="<?php echo $this->Url->build(['action' => 'index']); ?>" style="font-size:20px"><i class="fa fa-arrow-left" style="color:#03a9f4"></i> <?php echo __('Voltar'); ?></a></li>
   </ol>
 </section>
 <!-- Main content -->
@@ -128,6 +128,7 @@ use App\Model\Entity\Endereco;
                   <div class="row">
                     <!-- Hidden Inputs -->
                     <input type='hidden' name='cliente_id' value=<?= $cliente->id ?>>
+                    <input type="hidden" name="id_telefone" id="id_telefone">
 
                     <div class="col-md-4">
                       <?= $this->Form->control('tipo_telefone',[
@@ -152,7 +153,7 @@ use App\Model\Entity\Endereco;
                       ]) ?>
                     </div>
                     <div class="col-md-12">
-                      <button class="btn btn-flat btn-success float-r" type="submit">Adicionar</button>
+                      <button class="btn btn-flat btn-success float-r" type="submit">Enviar</button>
                     </div>                      
                     <?= $this->Form->end(); ?>
                   </div>
@@ -169,7 +170,7 @@ use App\Model\Entity\Endereco;
                         </tr>
                       </thead>
                       <tbody>
-                        <?php foreach($cliente->telefones ?? [] as $key => $telefone) : ?>
+                        <?php foreach($telefonesCliente ?? [] as $key => $telefone) : ?>
                         <tr>
                           <td><?= $key ?></td>
                           <td><?= ucfirst(h($telefone->tipo_telefone)) ?></td>
@@ -177,10 +178,27 @@ use App\Model\Entity\Endereco;
                           <td><?= date_format($telefone->created, 'd/m/Y H:i') ?></td>
                           <td style='width:80px'>
                             <div class="col-md-12">
-                              <button class="btn btn-xs btn-warning btn-flat" style="width:48px">Editar</button>
+                              <?php 
+                                  echo $this->Form->button(__('Editar'), [
+                                    'type' => 'button',
+                                    'style' => "width:49px",
+                                    'class' => 'btn btn-warning btn-xs btn-flat m-b-4',
+                                    "onclick" => "editTelefoneInCliente(" . str_replace('"', "'", json_encode($telefone)) . ");",
+                                  ]);
+                              ?>
                             </div>
                             <div class="col-md-12">
-                              <button class="btn btn-xs btn-danger btn-flat">Deletar</button>
+                              <?= 
+                                $this->Form->postButton("Deletar",[                                    
+                                  'controller' => 'Clientes',
+                                  'action' => 'deleteTelefoneInCliente',
+                                  $telefone->id,              
+                                  $cliente->id                     
+                                ],
+                                [
+                                  'class' => 'btn btn-xs btn-danger btn-flat'
+                                ])
+                              ?>                            
                             </div>
                           </td>
                         </tr>
@@ -202,6 +220,7 @@ use App\Model\Entity\Endereco;
 
                     <!-- Hidden Inputs -->
                     <input type='hidden' name='cliente_id' value=<?= $cliente->id ?>>
+                    <input type="hidden" name="id_endereco" id="id_endereco">
 
                     <div class="col-md-3">
                       <?= $this->Form->control("cep",[
@@ -237,7 +256,8 @@ use App\Model\Entity\Endereco;
                     <div class="col-md-4">
                       <?= $this->Form->control("numero",[
                         'class' => 'form-control',
-                        'label' => 'Número',                       
+                        'label' => 'Número',           
+                        'id' => 'numero_endereco',            
                         'placeholder' => 'Digite...'
                       ]) ?>
                     </div>
@@ -265,7 +285,7 @@ use App\Model\Entity\Endereco;
                       ]) ?>
                     </div>
                     <div class="col-md-12">
-                      <button class="btn btn-flat btn-success float-r" type="submit">Adicionar</button>
+                      <button class="btn btn-flat btn-success float-r" type="submit">Enviar</button>
                     </div>
                     <?= $this->Form->end(); ?>
                   </div>
@@ -291,12 +311,30 @@ use App\Model\Entity\Endereco;
                             <td><?= $endereco->cidade ?></td>
                             <td style='width:80px'>
                               <div class="col-md-12">
-                                <button class="btn btn-xs btn-warning btn-flat" style="width:48px">Editar</button>
+                                <?php
+                                  echo $this->Form->button(__('Editar'), [
+                                    'type' => 'button',
+                                    'style' => "width:49px",
+                                    'class' => 'btn btn-warning btn-xs btn-flat m-b-4',
+                                    "onclick" => "editEnderecoInCliente(" . str_replace('"', "'", json_encode($endereco)) . ");",
+                                  ]);
+                                ?>
                               </div>
                               <div class="col-md-12">
-                                <button class="btn btn-xs btn-danger btn-flat">Deletar</button>
+                                <?= 
+                                  $this->Form->postButton("Deletar",[                                    
+                                    'controller' => 'Clientes',
+                                    'action' => 'deleteEnderecoInCliente',
+                                    $endereco->id,
+                                    $cliente->id                    
+                                  ],
+                                  [
+                                    'class' => 'btn btn-xs btn-danger btn-flat'
+                                  ])
+                                ?>
                               </div>
-                            </td>                          </tr>
+                            </td>                          
+                          </tr>
                           <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -323,6 +361,35 @@ use App\Model\Entity\Endereco;
 
       }
     });
-
   });
+
+  function editTelefoneInCliente(telefone)
+  {
+    $("#numero").removeAttr("disabled");
+
+    $("#tipo-telefone").val(telefone.tipo_telefone).trigger("change");
+
+    $("#numero").val(telefone.numero);
+
+    $("#id_telefone").val(telefone.id);
+  }
+
+  function editEnderecoInCliente(endereco)
+  {
+    $("#id_endereco").val(endereco.id);
+
+    $("#cep").val(endereco.cep);
+
+    $("#tipo-endereco").val(endereco.tipo_endereco).trigger("change");
+
+    $("#logradouro").val(endereco.logradouro);
+
+    $("#numero_endereco").val(endereco.numero);
+
+    $("#bairro").val(endereco.bairro);
+
+    $("#cidade").val(endereco.cidade);
+
+    $("#estado2").val(endereco.estado).trigger("change");
+  }
 </script>

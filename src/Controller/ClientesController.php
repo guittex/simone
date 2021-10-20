@@ -45,7 +45,10 @@ class ClientesController extends AppController
         $enderecosCliente = $this->loadModel('Enderecos')->find("all")
             ->where(['deleted' => 0]);
 
-        $this->set(compact('cliente', 'telefone', 'endereco', 'enderecosCliente'));
+        $telefonesCliente = $this->loadModel('Telefones')->find("all")
+            ->where(['deleted' => 0]);
+
+        $this->set(compact('cliente', 'telefone', 'endereco', 'enderecosCliente', 'telefonesCliente'));
     }
 
     /**
@@ -58,12 +61,22 @@ class ClientesController extends AppController
     public function addTelefoneInCliente($id)
     {
         if ($this->request->is('post')) {
-            $telefone = $this->loadModel('Telefones')->newEmptyEntity();
+            
+            if($this->getRequest()->getData('id_telefone')){
+                $msg = "Telefone editado com sucesso";
+
+                $telefone = $this->loadModel('Telefones')->get($this->getRequest()->getData('id_telefone'));
+            }else{
+                $msg = "Telefone adicionado com sucesso";
+
+                $telefone = $this->loadModel('Telefones')->newEmptyEntity();
+
+            }           
 
             $telefone = $this->loadModel('Telefones')->patchEntity($telefone, $this->request->getData());
-
+            
             if ($this->loadModel('Telefones')->save($telefone)) {
-                $this->Flash->success(__('Telefone adicionado com sucesso'));
+                $this->Flash->success(__("$msg"));
 
             }else{
                 $this->Flash->error(__('Erro ao adicionar Telefone'));
@@ -75,7 +88,51 @@ class ClientesController extends AppController
     }
 
     /**
-     * Adiciona um endereco a partir da visualização do cliente
+     * Deleta um endereco a partir da visualização do cliente
+     *
+     * @param int|null $id Endereco id.
+     * @param int|null $cliente_id Cliente id.
+     * @return \Cake\Http\Response|null|void Renders view
+    */
+    public function deleteEnderecoInCliente($id, $cliente_id)
+    {
+        if ($this->request->is('post')) {   
+            $endereco = $this->loadModel('Enderecos')->get($id);
+
+            $endereco->deleted = 1;
+
+            $this->loadModel('Enderecos')->save($endereco);
+
+            $this->Flash->success(__("Endereco deletado com sucesso"));
+
+            return $this->redirect(['action' => 'view', $id]);
+        }
+    }
+
+    /**
+     * Deleta um telefone a partir da visualização do cliente
+     *
+     * @param int|null $id Telefone id.
+     * @param int|null $cliente_id Cliente id.
+     * @return \Cake\Http\Response|null|void Renders view
+    */
+    public function deleteTelefoneInCliente($id, $cliente_id)
+    {
+        if ($this->request->is('post')) {   
+            $telefone = $this->loadModel('Telefones')->get($id);
+
+            $telefone->deleted = 1;
+
+            $this->loadModel('Telefones')->save($telefone);
+
+            $this->Flash->success(__("Telefone deletado com sucesso"));
+
+            return $this->redirect(['action' => 'view', $cliente_id]);
+        }
+    }
+
+    /**
+     * Adiciona ou edita um endereco a partir da visualização do cliente
      *
      * @param string|null $id Cliente id.
      * @return \Cake\Http\Response|null|void Renders view
@@ -83,13 +140,21 @@ class ClientesController extends AppController
     */
     public function addEnderecoInCliente($id)
     {
-        if ($this->request->is('post')) {          
-            $endereco = $this->loadModel('Enderecos')->newEmptyEntity();
+        if ($this->request->is('post')) {   
+            if($this->getRequest()->getData('id_endereco')){
+                $msg = 'Endereco editado com sucesso';
+
+                $endereco = $this->loadModel('Enderecos')->get($this->getRequest()->getData('id_endereco'));
+            }else{
+                $msg = 'Endereco adicionado com sucesso';
+
+                $endereco = $this->loadModel('Enderecos')->newEmptyEntity();
+            }           
 
             $endereco = $this->loadModel('Enderecos')->patchEntity($endereco, $this->request->getData());
 
             if ($this->loadModel('Enderecos')->save($endereco)) {
-                $this->Flash->success(__('Endereço adicionado com sucesso'));
+                $this->Flash->success(__("$msg"));
 
             }else{
                 $this->Flash->error(__('Erro ao adicionar Endereço'));
