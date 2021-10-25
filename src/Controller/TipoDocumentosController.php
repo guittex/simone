@@ -83,8 +83,17 @@ class TipoDocumentosController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $tipoDocumento = $this->TipoDocumentos->patchEntity($tipoDocumento, $this->request->getData());
+            $post = $this->request->getData();
+
+            if(isset($post['obrigatorio'])){
+                $post['obrigatorio'] = 1;
+            }else{
+                $post['obrigatorio'] = 0;
+            }
+
+            $tipoDocumento = $this->TipoDocumentos->patchEntity($tipoDocumento, $post);
             if ($this->TipoDocumentos->save($tipoDocumento)) {
+                
                 $this->Flash->success(__('Tipo de Documento editado com sucesso'));
 
                 return $this->redirect(['action' => 'index']);

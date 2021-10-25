@@ -24,21 +24,24 @@
           <div class="box-header with-border">
             <h3 class="box-title"><?php echo __('Formulário'); ?></h3>
           </div>
-          <!-- /.box-header -->
-          <!-- form start -->
           <?php echo $this->Form->create($tipoDocumento, ['role' => 'form']); ?>
             <div class="box-body">
-              <?php
-                echo $this->Form->control('nome');
-              ?>
+              <div class="col-md-8">
+                <?= $this->Form->control('nome'); ?>
+              </div>
+              <div class="col-md-3">
+                <div class="pretty p-switch p-fill p-bigger m-t-35">
+                    <input type="checkbox" name="obrigatorio" <?= $tipoDocumento->obrigatorio ? "checked" : "" ?> value="<?= $tipoDocumento->obrigatorio ?>" />
+                    <div class="state p-success">
+                        <label>Documento Obrigatório</label>
+                    </div>
+                </div>
+              </div>          
             </div>
             <div class="box-footer">
-              <button type="submit" class="btn btn-flat btn-success btn-flat float-r">Editar</button>
+                <button type="submit" class="btn btn-flat btn-success btn-flat float-r">Editar</button>
             </div>
-            <!-- /.box-body -->
-          <?php echo $this->Form->end(); ?>
-        </div>
-        <!-- /.box -->
+        <?php echo $this->Form->end(); ?>
       </div>
   </div>
   <!-- /.row -->
