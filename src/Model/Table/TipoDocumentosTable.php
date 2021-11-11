@@ -40,7 +40,7 @@ class TipoDocumentosTable extends Table
         parent::initialize($config);
 
         $this->setTable('tipo_documentos');
-        $this->setDisplayField('id');
+        $this->setDisplayField('nome');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');

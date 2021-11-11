@@ -113,7 +113,23 @@ use App\Model\Entity\Endereco;
                 <?= $this->Form->end(); ?>
               </div>
               <!-- ---------- Aba Documentos --------------->
-              <div class="tab-pane" id="documentos-aba">                
+              <div class="tab-pane" id="documentos-aba">   
+                <div class="box-header">
+                  
+                </div>             
+                <div class="box-body">
+                  <?php foreach($tipo_documentos_obrigatorios as $key => $tipo_documentos) : ?>
+                    <div class="col-md-4">
+                      <div class="panel panel-default">
+                        <div class="panel-heading text-center"><?= $tipo_documentos->nome ?></div>
+                        <div class="panel-body" style="height:200px"><i class="fa fa-user"></i></div>
+                        <div class="panel-footer text-center">
+                          <i class="fa fa-plus-circle" style="font-size: 30px;color: green;"></i>
+                        </div>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                </div>
               </div>
               <!-- ---------- Aba Telefones --------------->
               <div class="tab-pane" id="contatos-aba">                

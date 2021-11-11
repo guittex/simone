@@ -48,7 +48,13 @@ class ClientesController extends AppController
         $telefonesCliente = $this->loadModel('Telefones')->find("all")
             ->where(['deleted' => 0]);
 
-        $this->set(compact('cliente', 'telefone', 'endereco', 'enderecosCliente', 'telefonesCliente'));
+        $tipo_documentos_obrigatorios_list = $this->loadModel('TipoDocumentos')->find("list")
+            ->where(['obrigatorio' => 1]);
+           
+        $tipo_documentos_obrigatorios = $this->loadModel('TipoDocumentos')->find("all")
+            ->where(['obrigatorio' => 1]);
+
+        $this->set(compact('cliente', 'telefone', 'endereco', 'enderecosCliente', 'telefonesCliente', 'tipo_documentos_obrigatorios', 'tipo_documentos_obrigatorios_list'));
     }
 
     /**
