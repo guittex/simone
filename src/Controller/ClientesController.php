@@ -48,13 +48,30 @@ class ClientesController extends AppController
         $telefonesCliente = $this->loadModel('Telefones')->find("all")
             ->where(['deleted' => 0]);
 
+        $tipo_documentos_nao_obrigatorios_list = $this->loadModel('TipoDocumentos')->find("list")
+            ->where(['obrigatorio' => 0]);;
+
         $tipo_documentos_obrigatorios_list = $this->loadModel('TipoDocumentos')->find("list")
             ->where(['obrigatorio' => 1]);
            
         $tipo_documentos_obrigatorios = $this->loadModel('TipoDocumentos')->find("all")
             ->where(['obrigatorio' => 1]);
 
-        $this->set(compact('cliente', 'telefone', 'endereco', 'enderecosCliente', 'telefonesCliente', 'tipo_documentos_obrigatorios', 'tipo_documentos_obrigatorios_list'));
+        $documentos_nao_obrigatorios = $this->loadModel('Documentos')->find("all")
+            ->where(['cliente_id' => $id])
+            ->contain(['Clientes', 'TipoDocumentos']);
+        
+        $this->set(compact(
+            'cliente', 
+            'telefone', 
+            'endereco', 
+            'enderecosCliente', 
+            'documentos_nao_obrigatorios',
+            'telefonesCliente', 
+            'tipo_documentos_obrigatorios', 
+            'tipo_documentos_obrigatorios_list',
+            'tipo_documentos_nao_obrigatorios_list'
+        ));
     }
 
     /**
@@ -246,5 +263,52 @@ class ClientesController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Adiciona um tipo de documento na aba de documentos em cliente
+     *
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     */
+    public function addTipoDocumento()
+    {
+        $post = $this->getRequest()->getData();
+
+        $documentos = $this->loadModel('Documentos')->newEmptyEntity();
+
+        $documentos = $this->loadModel('Documentos')->patchEntity($documentos, $post);
+
+        try {
+            $this->loadModel('Documentos')->save($documentos);
+
+            $this->Flash->success(__('O Tipo de Documento foi adicionado com sucesso'));
+
+            return $this->redirect(['action' => 'view', $post['cliente_id']]);
+        } catch (\Throwable $th) {            
+            $this->Flash->error(__('Erro ao adicionar o Tipo de Documento'));
+
+            return $this->redirect(['action' => 'view', $post['cliente_id']]);
+        }
+    }
+
+    public function addDocumento()
+    {
+        $post = $this->getRequest()->getData();
+
+        $documento = $this->loadModel('Documentos')->newEmptyEntity();
+
+        $documento = $this->loadModel('Documentos')->patchEntity($documento, $post);
+
+        try {
+            $this->loadModel('Documentos')->save($documento);
+
+            $this->Flash->success(__('O Documento foi adicionado com sucesso'));
+
+            return $this->redirect(['action' => 'view', $post['cliente_id']]);
+        } catch (\Throwable $th) {
+            $this->Flash->error(__('Erro ao adicionar o Documento'));
+
+            return $this->redirect(['action' => 'view', $post['cliente_id']]);
+        }
     }
 }

@@ -20,6 +20,9 @@
                 <li class="active">
                     <a href="#carros-aba" data-toggle="tab"><?= __('Dados do Carro') ?></a>
                 </li>
+                <li>
+                  <a href="#documentos-aba" data-toggle="tab"><?= __('Documentos do Anexados') ?></a>
+                </li>
               </ul>
               <div class="tab-content">
                 <div class="active tab-pane" id="carros-aba">
@@ -51,6 +54,9 @@
                     <button class="btn btn-flat btn-warning float-r">Editar</button>
                   </div>
                   <?= $this->Form->end(); ?>
+                </div>
+                <div class="tab-pane" id="documentos-aba">
+
                 </div>
               </div>
           </div>

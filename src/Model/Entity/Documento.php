@@ -33,6 +33,7 @@ class Documento extends Entity
         'arquivo' => true,
         'created' => true,
         'modified' => true,
+        'descricao' => true,
         'cliente_id' => true,
         'tipo_documento_id' => true,
         'cliente' => true,

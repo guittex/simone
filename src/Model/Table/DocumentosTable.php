@@ -6,7 +6,11 @@ namespace App\Model\Table;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
+use ArrayObject;
+use Cake\Event\Event;
 use Cake\Validation\Validator;
+use Cake\ORM\Entity;
+use Cake\Filesystem\File;
 
 /**
  * Documentos Model
@@ -48,6 +52,21 @@ class DocumentosTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->addBehavior('Josegonzalez/Upload.Upload', [
+            'arquivo' => [
+                'nameCallback' => function ($table, $entity, $data, $field, $settings) {
+                    $name = strtotime('now') . '.' . pathinfo($entity->arquivo->clientFilename, PATHINFO_EXTENSION);
+
+                    return $name;
+                },
+                'deleteCallback' => function ($path, $entity, $field, $settings) {
+                    return [$path . $entity->{$field}];
+                },
+                'restoreValueOnFailure' => true,
+                'keepFilesOnDelete' => false
+            ]
+        ]);
+
         $this->belongsTo('Clientes', [
             'foreignKey' => 'cliente_id',
         ]);
@@ -68,11 +87,6 @@ class DocumentosTable extends Table
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
 
-        $validator
-            ->scalar('arquivo')
-            ->maxLength('arquivo', 100)
-            ->allowEmptyString('arquivo');
-
         return $validator;
     }
 
@@ -89,5 +103,6 @@ class DocumentosTable extends Table
         $rules->add($rules->existsIn(['tipo_documento_id'], 'TipoDocumentos'), ['errorField' => 'tipo_documento_id']);
 
         return $rules;
-    }
+    } 
+ 
 }

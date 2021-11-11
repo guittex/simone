@@ -115,16 +115,45 @@ use App\Model\Entity\Endereco;
               <!-- ---------- Aba Documentos --------------->
               <div class="tab-pane" id="documentos-aba">   
                 <div class="box-header">
-                  
+                  <?= $this->Form->create(null,[
+                    'url' => [
+                      'action' => 'addTipoDocumento',
+                    ],
+                    'type' => 'post'
+                  ]) ?>
+                  <!-- Hidden inputs -->
+                  <?= $this->Form->hidden('cliente_id',['value' => $cliente->id]) ?>
+                  <div class="col-md-4">
+                      <?= $this->Form->control('tipo_documento_id',[
+                        'options' => $tipo_documentos_nao_obrigatorios_list,
+                        'empty' => 'Selecione...',
+                        'class' => 'form-control select2'
+                      ]) ?>
+                  </div>
+                  <div class="col-md-4">
+                    <button class="btn btn-success m-t-25 btn-flat">Adicionar</button>
+                  </div>
+                  <?= $this->Form->end(); ?>
                 </div>             
                 <div class="box-body">
                   <?php foreach($tipo_documentos_obrigatorios as $key => $tipo_documentos) : ?>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="panel panel-default">
                         <div class="panel-heading text-center"><?= $tipo_documentos->nome ?></div>
                         <div class="panel-body" style="height:200px"><i class="fa fa-user"></i></div>
                         <div class="panel-footer text-center">
-                          <i class="fa fa-plus-circle" style="font-size: 30px;color: green;"></i>
+                          <i class="fa fa-plus-circle" onclick="openModalAnexarDocumento(<?= $tipo_documentos->id ?>, 'tipo_documento')" style="font-size: 30px;color: green;cursor:pointer"></i>
+                        </div>
+                      </div>
+                    </div>
+                  <?php endforeach; ?>
+                  <?php foreach($documentos_nao_obrigatorios as $key => $documentos) : ?>
+                    <div class="col-md-3">
+                      <div class="panel panel-default">
+                        <div class="panel-heading text-center"><?= $documentos->tipo_documento->nome ?></div>
+                        <div class="panel-body" style="height:200px"><i class="fa fa-user"></i></div>
+                        <div class="panel-footer text-center">
+                          <i class="fa fa-plus-circle" onclick="openModalAnexarDocumento(<?= $documentos->id ?>, 'documento')" style="font-size: 30px;color: green;cursor:pointer"></i>
                         </div>
                       </div>
                     </div>
@@ -362,6 +391,51 @@ use App\Model\Entity\Endereco;
       </div>
     </div>
   </div>
+  <!-- Modais -->
+  <div class="modal" tabindex="-1" role="dialog" id="modalAnexarDocumento">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <?= $this->Form->create(null,[
+          'url' => [
+            'action' => 'addDocumento',
+            $cliente->id
+          ],
+          'type' => 'file'
+        ]) ?> 
+        <div class="modal-header">
+          <h4 class="modal-title">Anexar Documento</h4>
+        </div>
+        <div class="modal-body" id="bodyModal">
+          <!-- Hidden inputs -->
+          <?= $this->Form->hidden("cliente_id",['value' => $cliente->id]) ?>
+          <input type="hidden" name="tipo_documento_id" id="tipoDocumentoModal">
+          
+          <div class="row">
+            <div class="col-md-12">
+              <?= $this->Form->control("arquivo",[
+                'type' => 'file',
+                'class' => 'form-control',
+                'templates' => [
+                  'inputContainer' => "{{content}}"
+                ]
+              ]) ?>
+            </div>
+            <div class="col-md-12 m-t-10">
+              <label for="">Descrição</label>
+              <?= $this->Form->textarea("descricao",[
+                'class' => 'form-control',
+              ]) ?>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Fechar</button>
+          <button type="submit" class="btn btn-success btn-flat">Adicionar</button>
+        </div>
+        <?= $this->Form->end() ?>
+      </div>
+    </div>
+  </div>
 </section>
 <script>
   $(document).ready(function(){
@@ -378,6 +452,13 @@ use App\Model\Entity\Endereco;
       }
     });
   });
+
+  function openModalAnexarDocumento(id, tipo)
+  {
+    $("#tipoDocumentoModal").val(id);
+
+    $("#modalAnexarDocumento").modal("show");
+  }
 
   function editTelefoneInCliente(telefone)
   {
