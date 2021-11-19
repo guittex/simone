@@ -114,46 +114,85 @@ use App\Model\Entity\Endereco;
               </div>
               <!-- ---------- Aba Documentos --------------->
               <div class="tab-pane" id="documentos-aba">   
-                <div class="box-header">
-                  <?= $this->Form->create(null,[
-                    'url' => [
-                      'action' => 'addTipoDocumento',
-                    ],
-                    'type' => 'post'
-                  ]) ?>
-                  <!-- Hidden inputs -->
-                  <?= $this->Form->hidden('cliente_id',['value' => $cliente->id]) ?>
-                  <div class="col-md-4">
-                      <?= $this->Form->control('tipo_documento_id',[
-                        'options' => $tipo_documentos_nao_obrigatorios_list,
-                        'empty' => 'Selecione...',
-                        'class' => 'form-control select2'
-                      ]) ?>
-                  </div>
-                  <div class="col-md-4">
-                    <button class="btn btn-success m-t-25 btn-flat">Adicionar</button>
-                  </div>
-                  <?= $this->Form->end(); ?>
-                </div>             
                 <div class="box-body">
-                  <?php foreach($tipo_documentos_obrigatorios as $key => $tipo_documentos) : ?>
+                  <?php foreach($tipo_documentos as $key => $tipo_documento) : ?>
                     <div class="col-md-3">
                       <div class="panel panel-default">
-                        <div class="panel-heading text-center"><?= $tipo_documentos->nome ?></div>
-                        <div class="panel-body" style="height:200px"><i class="fa fa-user"></i></div>
-                        <div class="panel-footer text-center">
-                          <i class="fa fa-plus-circle" onclick="openModalAnexarDocumento(<?= $tipo_documentos->id ?>, 'tipo_documento')" style="font-size: 30px;color: green;cursor:pointer"></i>
+                        <div class="panel-heading text-center">
+                          <?= $tipo_documento->nome ?>
                         </div>
-                      </div>
-                    </div>
-                  <?php endforeach; ?>
-                  <?php foreach($documentos_nao_obrigatorios as $key => $documentos) : ?>
-                    <div class="col-md-3">
-                      <div class="panel panel-default">
-                        <div class="panel-heading text-center"><?= $documentos->tipo_documento->nome ?></div>
-                        <div class="panel-body" style="height:200px"><i class="fa fa-user"></i></div>
+                        <div class="panel-body" style="height:175px;text-align:center;overflow:auto">
+                          <?php 
+                            if(count($tipo_documento->documentos) >= 1){
+                              $type_file = pathinfo($tipo_documento->documentos[0]->arquivo, PATHINFO_EXTENSION);
+
+                              $type_images = ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG'];
+
+                              if(in_array($type_file, $type_images)){
+                                $file = $tipo_documento->documentos[0]->arquivo;
+
+                                $link = $this->Html->image($file, [
+                                    'target' => '_blank',
+                                    'pathPrefix' => "files/Documentos/arquivo/",
+                                    'style' => 'width:193px'
+                                ]);
+                                
+                                echo $link;
+
+                              }else{
+                                $file = $tipo_documento->documentos[0]->arquivo;
+
+                                $link_file = $this->Html->link('replace_icon', [
+                                      'controller' => "files",
+                                      'action' => "Documentos",
+                                      "arquivo",
+                                      $file
+                                    ],[
+                                      "target" => '_blank',
+                                      'download' => "Documento"
+                                    ]
+                                );
+
+                                $link_image = $this->Html->image('pdf.png', [
+                                    'target' => '_blank',
+                                    'pathPrefix' => "files/Imagens/arquivo/",
+                                    'style' => 'width:140px'
+                                ]);
+
+                                echo str_replace("replace_icon", $link_image, $link_file);
+                              }
+                            }else{
+                              echo $this->Html->image('no_file.png', [
+                                  'target' => '_blank',
+                                  'pathPrefix' => "files/Imagens/arquivo/",
+                                  'style' => 'width:140px'
+                              ]);
+                            }
+                          ?>
+                          <!-- <i class="fa fa-user"></i> -->
+                        </div>
                         <div class="panel-footer text-center">
-                          <i class="fa fa-plus-circle" onclick="openModalAnexarDocumento(<?= $documentos->id ?>, 'documento')" style="font-size: 30px;color: green;cursor:pointer"></i>
+                          <?php if(count($tipo_documento->documentos) >= 1) {
+                            $link_file = $this->Html->link('replace_icon', [
+                                    'controller' => "files",
+                                    'action' => "Documentos",
+                                    "arquivo",
+                                    $file
+                                  ],[
+                                    "target" => '_blank',
+                                    'download' => "Documento"
+                                  ]
+                              );
+
+                              if($tipo_documento->documentos[0]->descricao){
+                                $descricao = $tipo_documento->documentos[0]->descricao;
+
+                                echo "<i class='fa fa-info-circle m-r-10' data-toggle='tooltip' data-placement='top' style='font-size: 30px' title='$descricao'></i>";
+                              }
+
+                            echo str_replace("replace_icon", '<i class="fa fa-download m-r-10" style="font-size: 30px;color: #3f51b5;cursor:pointer"></i>', $link_file);
+                          }?>
+                          <i class="fa fa-plus-circle" onclick="openModalAnexarDocumento(<?= $tipo_documento->id ?>, 'tipo_documento')"  style="font-size: 30px;color: green;cursor:pointer"></i>
                         </div>
                       </div>
                     </div>
@@ -400,7 +439,8 @@ use App\Model\Entity\Endereco;
             'action' => 'addDocumento',
             $cliente->id
           ],
-          'type' => 'file'
+          'type' => 'file',
+          'id' => 'formAnexarDoc'
         ]) ?> 
         <div class="modal-header">
           <h4 class="modal-title">Anexar Documento</h4>
@@ -430,7 +470,7 @@ use App\Model\Entity\Endereco;
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger btn-flat" data-dismiss="modal">Fechar</button>
-          <button type="submit" class="btn btn-success btn-flat">Adicionar</button>
+          <button type="submit" class="btn btn-success btn-flat" onclick="disabledButton(this)">Adicionar</button>
         </div>
         <?= $this->Form->end() ?>
       </div>
@@ -451,7 +491,17 @@ use App\Model\Entity\Endereco;
 
       }
     });
+
+    $('[data-toggle="tooltip"]').tooltip()
+
   });
+
+  function disabledButton(elemento)
+  {
+    $(elemento).attr("disabled", "disabled");
+
+    $("#formAnexarDoc").submit();
+  }
 
   function openModalAnexarDocumento(id, tipo)
   {

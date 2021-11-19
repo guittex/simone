@@ -44,6 +44,10 @@ class TipoDocumentosTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Documentos', [
+            'foreignKey' => 'tipo_documento_id'
+        ]);
     }
 
     /**

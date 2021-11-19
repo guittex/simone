@@ -38,5 +38,6 @@ class Documento extends Entity
         'tipo_documento_id' => true,
         'cliente' => true,
         'tipo_documento' => true,
+        'deleted' => true
     ];
 }

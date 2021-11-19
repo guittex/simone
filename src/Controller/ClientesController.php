@@ -48,29 +48,22 @@ class ClientesController extends AppController
         $telefonesCliente = $this->loadModel('Telefones')->find("all")
             ->where(['deleted' => 0]);
 
-        $tipo_documentos_nao_obrigatorios_list = $this->loadModel('TipoDocumentos')->find("list")
-            ->where(['obrigatorio' => 0]);;
-
-        $tipo_documentos_obrigatorios_list = $this->loadModel('TipoDocumentos')->find("list")
-            ->where(['obrigatorio' => 1]);
-           
-        $tipo_documentos_obrigatorios = $this->loadModel('TipoDocumentos')->find("all")
-            ->where(['obrigatorio' => 1]);
-
-        $documentos_nao_obrigatorios = $this->loadModel('Documentos')->find("all")
-            ->where(['cliente_id' => $id])
-            ->contain(['Clientes', 'TipoDocumentos']);
-        
+        $tipo_documentos = $this->loadModel('TipoDocumentos')->find("all")
+            ->contain([
+                "Documentos" => [
+                    'conditions' => [
+                        'deleted' => 0
+                    ] 
+                ]
+            ]);
+       
         $this->set(compact(
             'cliente', 
             'telefone', 
             'endereco', 
             'enderecosCliente', 
-            'documentos_nao_obrigatorios',
             'telefonesCliente', 
-            'tipo_documentos_obrigatorios', 
-            'tipo_documentos_obrigatorios_list',
-            'tipo_documentos_nao_obrigatorios_list'
+            'tipo_documentos', 
         ));
     }
 
@@ -295,6 +288,8 @@ class ClientesController extends AppController
     {
         $post = $this->getRequest()->getData();
 
+        $this->checkHasDocumento($post);
+
         $documento = $this->loadModel('Documentos')->newEmptyEntity();
 
         $documento = $this->loadModel('Documentos')->patchEntity($documento, $post);
@@ -310,5 +305,22 @@ class ClientesController extends AppController
 
             return $this->redirect(['action' => 'view', $post['cliente_id']]);
         }
+    }
+
+    public function checkHasDocumento($post)
+    {
+        $documento = $this->loadModel("Documentos")->find("all")
+            ->where(['cliente_id' => $post['cliente_id'], 'tipo_documento_id' => $post['tipo_documento_id'], 'deleted' => 0])
+            ->toArray();
+
+        if($documento >= 1){
+            foreach ($documento as $key => $doc) {
+                $doc->deleted = 1;
+
+                $this->loadModel('Documentos')->save($doc);
+            }
+        }
+        
+        return;
     }
 }
