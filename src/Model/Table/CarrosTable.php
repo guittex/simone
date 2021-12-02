@@ -40,7 +40,7 @@ class CarrosTable extends Table
         parent::initialize($config);
 
         $this->setTable('carros');
-        $this->setDisplayField('id');
+        $this->setDisplayField('modelo');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');

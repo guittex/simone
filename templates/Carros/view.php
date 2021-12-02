@@ -21,7 +21,10 @@
                     <a href="#carros-aba" data-toggle="tab"><?= __('Dados do Carro') ?></a>
                 </li>
                 <li>
-                  <a href="#documentos-aba" data-toggle="tab"><?= __('Documentos do Anexados') ?></a>
+                  <a href="#ordem-servico-aba" data-toggle="tab"><?= __('Ordem de Serviço') ?></a>
+                </li>
+                <li>
+                  <a href="#multa-aba" data-toggle="tab"><?= __('Multas') ?></a>
                 </li>
               </ul>
               <div class="tab-content">
@@ -55,8 +58,18 @@
                   </div>
                   <?= $this->Form->end(); ?>
                 </div>
-                <div class="tab-pane" id="documentos-aba">
+                <div class="tab-pane" id="ordem-servico-aba">
+                    <div class="box-header">
+                      <button class="btn btn-success float-r btn-flat" style="border-radius:20px">Adicionar</button>
+                    </div>
+                    <div class="box-body">
+                      Listagem de ordens do proprio carro
+                    </div>
+                </div>
+                <div class="tab-pane" id="multa-aba">
+                  <div class="box-body">
 
+                  </div>
                 </div>
               </div>
           </div>

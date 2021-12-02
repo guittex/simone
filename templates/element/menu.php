@@ -7,10 +7,9 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="<?= $this->Url->build(['controller' => 'Clientes', 'action' => 'index'], ['escape' => false]) ?>"><i class="fa fa-user"></i>Clientes</a></li>
-            <li><a href="<?php echo $this->Url->build('/pages/home2'); ?>"><i class="fa fa-car"></i> Reservas</a></li>
-            <li><a href="<?php echo $this->Url->build('/pages/home2'); ?>"><i class="fa fa-car"></i> Solicitações</a></li>
-            <li><a href="<?php echo $this->Url->build('/tipo-documentos'); ?>"><i class="fa fa-user"></i>Tipo Documentos</a></li>
+            <li><a href="<?= $this->Url->build(['controller' => 'Clientes', 'action' => 'index'], ['escape' => false]) ?>"><i class="fa fa-circle-o"></i>Clientes</a></li>
+            <li><a href="<?php echo $this->Url->build('/pages/home2'); ?>"><i class="fa fa-circle-o"></i>Usuários</a></li>
+            <li><a href="<?php echo $this->Url->build('/tipo-documentos'); ?>"><i class="fa fa-circle-o"></i>Tipo Documentos</a></li>
         </ul>
     </li> 
     <li class="treeview">
@@ -21,8 +20,9 @@
             </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="<?php echo $this->Url->build('/carros'); ?>"><i class="fa fa-car"></i>Listagem</a></li>
-
+            <li><a href="<?php echo $this->Url->build('/carros'); ?>"><i class="fa fa-circle-o"></i>Listagem</a></li>
+            <li><a href="<?php echo $this->Url->build('/pages/home2'); ?>"><i class="fa fa-circle-o"></i>Reservas</a></li>
+            <li><a href="<?= $this->Url->build(['controller' => 'OrdemServicos', 'action' => 'index'], ['escape' => false]) ?>"><i class="fa fa-circle-o"></i>Ordem de Serviço</a></li>
         </ul>
     </li>
 </ul>

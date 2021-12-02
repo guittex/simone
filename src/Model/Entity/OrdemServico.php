@@ -6,19 +6,19 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Documento Entity
+ * OrdemServico Entity
  *
  * @property int $id
- * @property string|null $arquivo
+ * @property string|null $diagnostico
+ * @property string|null $solucao
+ * @property string|null $valor_total_gasto
  * @property \Cake\I18n\FrozenTime|null $created
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property int|null $cliente_id
- * @property int|null $tipo_documento_id
+ * @property int|null $carro_id
  *
- * @property \App\Model\Entity\Cliente $cliente
- * @property \App\Model\Entity\TipoDocumento $tipo_documento
+ * @property \App\Model\Entity\Carro $carro
  */
-class Documento extends Entity
+class OrdemServico extends Entity
 {
     /**
      * Fields that can be mass assigned using newEntity() or patchEntity().
@@ -30,15 +30,12 @@ class Documento extends Entity
      * @var array
      */
     protected $_accessible = [
-        'arquivo' => true,
+        'diagnostico' => true,
+        'solucao' => true,
+        'valor_total_gasto' => true,
         'created' => true,
         'modified' => true,
-        'descricao' => true,
-        'cliente_id' => true,
-        'tipo_documento_id' => true,
-        'cliente' => true,
-        'tipo_documento' => true,
-        'deleted' => true,
-        'carro_id' => true
+        'carro_id' => true,
+        'carro' => true,
     ];
 }
