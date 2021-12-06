@@ -60,10 +60,37 @@
                 </div>
                 <div class="tab-pane" id="ordem-servico-aba">
                     <div class="box-header">
-                      <button class="btn btn-success float-r btn-flat" style="border-radius:20px">Adicionar</button>
+                      <?= $this->Html->link('Adicionar', [
+                          'controller' => 'OrdemServicos',
+                          'action' => 'add'
+                      ], ['class' => 'btn btn-success float-r btn-flat', 'target' => '_blank', 'style' => "border-radius:20px"]) ?>
                     </div>
                     <div class="box-body">
-                      Listagem de ordens do proprio carro
+                      <hr style="margin-top:5px">
+                      <table class="table table-hover table_data">
+                        <thead>
+                          <tr>
+                            <th>id</th>
+                            <th>Diagnóstico</th>
+                            <th>Valor Total Gasto</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php foreach($ordem_servicos as $key => $ordem) : ?>
+                            <tr>
+                              <td><?= $ordem->id ?></td>
+                              <td><?= substr($ordem->diagnostico, 1, 80) . '...' ?></td>
+                              <td><?= $this->Number->currency($ordem->valor_total_gasto); ?></td>
+                              <td><?= date_format($ordem->created, 'd/m/Y H:i') ?></td>
+                              <td>
+                                <button class="btn btn-primary btn-flat btn-xs" onclick="openModalOrdem(<?= $ordem->id ?>)">Visualizar</button>
+                              </td>
+                            </tr>
+                          <?php endforeach; ?>
+                        </tbody>
+                      </table>
                     </div>
                 </div>
                 <div class="tab-pane" id="multa-aba">
@@ -77,5 +104,65 @@
       </div>
     </div>
   </div>
+  <div class="modal" tabindex="-1" role="dialog" id="modalViewOrdem">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="col-md-6">
+            <h3 class="modal-title">
+              <i class="fa fa-info-circle"></i> Informações
+            </h3>
+          </div>
+          <div class="col-md-6">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" style="font-size:37px">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12" id="divBodyViewOrdem" style="font-size:16px">
 
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </div>  
 </section>
+<script>
+  $(document).ready(function(){
+    
+  });
+  
+  function urlViewOrdem() {
+      return "<?= $this->Url->build("/carros/view-ordem"); ?>"
+  }
+
+  function openModalOrdem(id)
+  {
+    $("#modalViewOrdem").modal("show");
+
+    $.ajax({
+        url: urlViewOrdem(),
+        method: 'GET',
+        data:{
+            id: id
+        },
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('X-CSRF-Token', $('[name="_csrfToken"').val());
+        },
+        success: function(data){
+          $("#divBodyViewOrdem").empty();
+
+          retorno = JSON.parse(data);
+
+          $("#divBodyViewOrdem").append(`<p><b>Diagnóstico: </b>${retorno.diagnostico}</p>`)
+          $("#divBodyViewOrdem").append(`<p><b>Solução: </b>${retorno.solucao}</p>`)
+        }
+    });
+  }
+</script>

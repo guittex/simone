@@ -35,7 +35,10 @@ class CarrosController extends AppController
             'contain' => [],
         ]);
 
-        $this->set(compact('carro'));
+        $ordem_servicos = $this->loadModel('OrdemServicos')->find("all")
+            ->where(['carro_id', $id]);
+
+        $this->set(compact('carro', 'ordem_servicos'));
     }
 
 
@@ -103,5 +106,16 @@ class CarrosController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function viewOrdem()
+    {
+        $this->autoRender = false;
+
+        $get = $this->getRequest()->getQuery();
+
+        $ordem = $this->loadModel('OrdemServicos')->get($get['id']);
+
+        echo json_encode($ordem);
     }
 }
