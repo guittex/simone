@@ -50,6 +50,8 @@ class OrdemServicosTable extends Table
         $this->belongsTo('Carros', [
             'foreignKey' => 'carro_id',
         ]);
+
+        $this->hasMany('Documentos');
     }
 
     /**

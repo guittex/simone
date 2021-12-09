@@ -64,4 +64,33 @@
       </div>
     </div>
   </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-solid">
+        <div class="box-header with-border">
+          <i class="fa fa-image"></i>
+          <h3 class="box-title"><?= __('Imagens') ?></h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" style="text-align:center">
+          <?php 
+            if(count($ordemServico->documentos) >= 1) :
+            foreach ($ordemServico->documentos as $key => $file) : 
+          ?>
+            <div class="col-md-4">                        
+              <?= $this->Html->image($file->arquivo, [
+                    'target' => '_blank',
+                    'pathPrefix' => "files/Documentos/arquivo/",
+                    'style' => 'width:193px;border-radius:10px'
+                ]);                
+              ?>
+            </div>
+          <?php 
+            endforeach; 
+            endif;
+          ?>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

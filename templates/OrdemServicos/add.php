@@ -26,7 +26,7 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <?php echo $this->Form->create($ordemServico, ['role' => 'form']); ?>
+          <?php echo $this->Form->create($ordemServico, ['role' => 'form', 'type' => 'file', 'enctype' => "multipart/form-data"]); ?>
             <div class="box-body">
               <div class="col-md-12">
                 <?= $this->Form->control('diagnostico', ['label' => 'Diagnóstico', 'class' => 'form-control', 'placeholder' => "Digite..."]); ?>
@@ -39,6 +39,9 @@
               </div>
               <div class="col-md-12">
                 <?= $this->Form->control('carro_id', ['label' => 'Carro', 'class' => 'form-control', 'placeholder' => "Digite..."]); ?>
+              </div>
+              <div class="col-md-12">
+                <?= $this->Form->control('arquivo', ['type' => 'file', 'name' => "arquivos[]", 'class' => 'form-control', 'placeholder' => "Selecione", "multiple" => "multiple"]); ?>
               </div>
             </div>
             <!-- /.box-body -->

@@ -55,7 +55,7 @@ class DocumentosTable extends Table
         $this->addBehavior('Josegonzalez/Upload.Upload', [
             'arquivo' => [
                 'nameCallback' => function ($table, $entity, $data, $field, $settings) {
-                    $name = strtotime('now') . '.' . pathinfo($entity->arquivo->clientFilename, PATHINFO_EXTENSION);
+                    $name = strtotime('now') . substr($entity->arquivo->clientFilename, 1, 10) . '.' . pathinfo($entity->arquivo->clientFilename, PATHINFO_EXTENSION);
 
                     return $name;
                 },

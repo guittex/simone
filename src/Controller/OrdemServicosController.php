@@ -36,7 +36,9 @@ class OrdemServicosController extends AppController
     public function view($id = null)
     {
         $ordemServico = $this->OrdemServicos->get($id, [
-            'contain' => ['Carros'],
+            'contain' => [
+                'Carros', 'Documentos'
+            ],
         ]);
 
         $this->set(compact('ordemServico'));
@@ -51,16 +53,37 @@ class OrdemServicosController extends AppController
     public function add()
     {
         $ordemServico = $this->OrdemServicos->newEmptyEntity();
+
         if ($this->request->is('post')) {
+            $post = array_filter($this->request->getData());
+
             $ordemServico = $this->OrdemServicos->patchEntity($ordemServico, $this->request->getData());
-            if ($this->OrdemServicos->save($ordemServico)) {
+
+            if ($this->OrdemServicos->save($ordemServico)) {                
+                if(isset($post['arquivos'])){
+                    if(count($post['arquivos']) >= 1){
+                        for ($i=0; $i < count($post['arquivos']); $i++) { 
+                            $documento = $this->loadModel('Documentos')->newEmptyEntity();
+                            $documento->arquivo = $post['arquivos'][$i];
+                            $documento->carro_id = $post['carro_id'];
+                            $documento->ordem_servico_id = $ordemServico->id;
+                            $documento = $this->loadModel('Documentos')->patchEntity($documento, []);
+
+                            $this->loadModel('Documentos')->save($documento);
+                        }
+                    }
+                }
+
                 $this->Flash->success(__('The {0} has been saved.', 'Ordem Servico'));
 
                 return $this->redirect(['action' => 'index']);
             }
+
             $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Ordem Servico'));
         }
+
         $carros = $this->OrdemServicos->Carros->find('list', ['limit' => 200]);
+
         $this->set(compact('ordemServico', 'carros'));
     }
 

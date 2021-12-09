@@ -44,6 +44,8 @@ class CarrosTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Documentos');
     }
 
     /**
