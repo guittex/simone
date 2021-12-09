@@ -73,22 +73,88 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body" style="text-align:center">
-          <?php 
+          <!-- </?php 
             if(count($ordemServico->documentos) >= 1) :
             foreach ($ordemServico->documentos as $key => $file) : 
           ?>
             <div class="col-md-4">                        
-              <?= $this->Html->image($file->arquivo, [
+              </?= $this->Html->image($file->arquivo, [
                     'target' => '_blank',
                     'pathPrefix' => "files/Documentos/arquivo/",
                     'style' => 'width:193px;border-radius:10px'
                 ]);                
               ?>
             </div>
-          <?php 
+          </?php 
             endforeach; 
             endif;
-          ?>
+          ?> -->
+          <?php foreach($ordemServico->documentos as $key => $file) : ?>
+            <div class="col-md-3">
+              <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                  Arquivo <?= $key + 1 ?>
+                </div>
+                <div class="panel-body" style="height:240px;text-align:center;overflow:auto">
+                  <?php 
+                      $type_file = pathinfo($file->arquivo, PATHINFO_EXTENSION);
+
+                      $type_images = ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG'];
+
+                      if(in_array($type_file, $type_images)){
+                        $file = $file->arquivo;
+
+                        $link = $this->Html->image($file, [
+                            'target' => '_blank',
+                            'pathPrefix' => "files/Documentos/arquivo/",
+                            'style' => 'width:193px'
+                        ]);
+                        
+                        echo $link;
+
+                      }else{
+                        $file = $file->arquivo;
+
+                        $link_file = $this->Html->link('replace_icon', [
+                              'controller' => "files",
+                              'action' => "Documentos",
+                              "arquivo",
+                              $file
+                            ],[
+                              "target" => '_blank',
+                              'download' => "Documento"
+                            ]
+                        );
+
+                        $link_image = $this->Html->image('pdf.png', [
+                            'target' => '_blank',
+                            'pathPrefix' => "files/Imagens/arquivo/",
+                            'style' => 'width:140px'
+                        ]);
+
+                        echo str_replace("replace_icon", $link_image, $link_file);
+                      }                    
+                  ?>
+                </div>
+                <div class="panel-footer text-center">
+                  <?php
+                    $link_file = $this->Html->link('replace_icon', [
+                            'controller' => "files",
+                            'action' => "Documentos",
+                            "arquivo",
+                            $file
+                          ],[
+                            "target" => '_blank',
+                            'download' => "Documento"
+                          ]
+                      );
+
+                    echo str_replace("replace_icon", '<i class="fa fa-download m-r-10" style="font-size: 30px;color: #3f51b5;cursor:pointer"></i>', $link_file);
+                  ?>
+                </div>
+              </div>
+            </div>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>

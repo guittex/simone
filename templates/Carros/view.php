@@ -162,6 +162,22 @@
 
           $("#divBodyViewOrdem").append(`<p><b>Diagnóstico: </b>${retorno.diagnostico}</p>`)
           $("#divBodyViewOrdem").append(`<p><b>Solução: </b>${retorno.solucao}</p>`)
+
+          
+          if(retorno.documentos.length >= 1){
+            $("#divBodyViewOrdem").append(`<p><b>Imagens: </b></p>`)
+
+            $(retorno.documentos).each(function(){
+              console.log(this.arquivo);
+              var extension = this.arquivo.split('.').pop();
+
+              if(extension == 'pdf'){
+                $("#divBodyViewOrdem").append(`<div class="col-md-3"><a href="/app/files/documentos/arquivo/${this.arquivo}" target="_blank" download="Documento"><img src="/app/files/Imagens/arquivo/pdf.png" target="_blank" style="width:140px" alt=""></a></div>`);
+              }else{
+                $("#divBodyViewOrdem").append(`<div class="col-md-3"><img src="/app/files/Documentos/arquivo/${this.arquivo}" target="_blank" style="width:193px" alt=""></div>`);
+              }
+            });
+          }
         }
     });
   }

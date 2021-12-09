@@ -114,7 +114,9 @@ class CarrosController extends AppController
 
         $get = $this->getRequest()->getQuery();
 
-        $ordem = $this->loadModel('OrdemServicos')->get($get['id']);
+        $ordem = $this->loadModel('OrdemServicos')->get($get['id'],[
+            'contain' => "Documentos"
+        ]);
 
         echo json_encode($ordem);
     }
