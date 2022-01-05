@@ -74,12 +74,12 @@ class OrdemServicosController extends AppController
                     }
                 }
 
-                $this->Flash->success(__('The {0} has been saved.', 'Ordem Servico'));
+                $this->Flash->success(__('Ordem de Serviço salvo com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
 
-            $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Ordem Servico'));
+            $this->Flash->error(__('Erro ao salvar Ordem de Serviço'));
         }
 
         $carros = $this->OrdemServicos->Carros->find('list', ['limit' => 200]);
@@ -101,13 +101,30 @@ class OrdemServicosController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $ordemServico = $this->OrdemServicos->patchEntity($ordemServico, $this->request->getData());
+            $post = array_filter($this->request->getData());
+           
+            $ordemServico = $this->OrdemServicos->patchEntity($ordemServico, $post);
+
             if ($this->OrdemServicos->save($ordemServico)) {
-                $this->Flash->success(__('The {0} has been saved.', 'Ordem Servico'));
+                if(isset($post['arquivos'])){
+                    if(count($post['arquivos']) >= 1){
+                        for ($i=0; $i < count($post['arquivos']); $i++) { 
+                            $documento = $this->loadModel('Documentos')->newEmptyEntity();
+                            $documento->arquivo = $post['arquivos'][$i];
+                            $documento->carro_id = $post['carro_id'];
+                            $documento->ordem_servico_id = $ordemServico->id;
+                            $documento = $this->loadModel('Documentos')->patchEntity($documento, []);
+
+                            $this->loadModel('Documentos')->save($documento);
+                        }
+                    }
+                }
+
+                $this->Flash->success(__('Ordem de serviço editado com sucesso!'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The {0} could not be saved. Please, try again.', 'Ordem Servico'));
+            $this->Flash->error(__('Erro ao editar ordem de serviço'));
         }
         $carros = $this->OrdemServicos->Carros->find('list', ['limit' => 200]);
         $this->set(compact('ordemServico', 'carros'));

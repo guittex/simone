@@ -36,7 +36,7 @@ class CarrosController extends AppController
         ]);
 
         $ordem_servicos = $this->loadModel('OrdemServicos')->find("all")
-            ->where(['carro_id', $id]);
+            ->where(['carro_id' => $id]);
 
         $this->set(compact('carro', 'ordem_servicos'));
     }

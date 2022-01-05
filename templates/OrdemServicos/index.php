@@ -36,10 +36,11 @@
                     </span>                    
                   </td>
                   <td><?= $ordemServico->carro->marca . " " . $ordemServico->carro->modelo ?></td>
-                  <td><?= $this->Number->currency($ordemServico->valor_total_gasto) ?></td>
+                  <td><?=  "R$ ". $ordemServico->valor_total_gasto ?></td>
                   <td><?= date_format($ordemServico->created, 'd/m/Y H:i') ?></td>
                   <td class="actions text-right">
                       <?= $this->Html->link(__('Visualizar'), ['action' => 'view', $ordemServico->id], ['class'=>'btn btn-info btn-xs btn-flat']) ?>
+                      <?= $this->Html->link(__('Editar'), ['action' => 'edit', $ordemServico->id], ['class'=>'btn btn-warning btn-xs btn-flat']) ?>
                   </td>
                 </tr>
               <?php endforeach; ?>

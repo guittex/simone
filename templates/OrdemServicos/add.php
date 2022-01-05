@@ -38,10 +38,10 @@
                 <?= $this->Form->control('valor_total_gasto', ['label' => 'Valor Total Gasto', 'class' => 'form-control', 'placeholder' => "Digite..."]); ?>
               </div>
               <div class="col-md-12">
-                <?= $this->Form->control('carro_id', ['label' => 'Carro', 'class' => 'form-control', 'placeholder' => "Digite..."]); ?>
+                <?= $this->Form->control('carro_id', ['label' => 'Carro', 'class' => 'form-control select2', 'empty' => "Selecione..."]); ?>
               </div>
               <div class="col-md-12">
-                <?= $this->Form->control('arquivo', ['type' => 'file', 'name' => "arquivos[]", 'class' => 'form-control', 'placeholder' => "Selecione", "multiple" => "multiple"]); ?>
+                <?= $this->Form->control('arquivo', ['type' => 'file', 'name' => "arquivos[]", 'label' => 'Adicionar Imagens', 'class' => 'form-control', 'placeholder' => "Selecione", "multiple" => "multiple"]); ?>
               </div>
             </div>
             <!-- /.box-body -->
@@ -56,4 +56,8 @@
   </div>
   <!-- /.row -->
 </section>
-
+<script>
+  $(document).ready(function(){
+    $('#valor-total-gasto').maskMoney();
+  });
+</script>

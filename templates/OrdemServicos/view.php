@@ -25,7 +25,7 @@
           </div>
           <div class="col-md-4">
             <label class="m-r-15" style="font-size:20px">Valor Total Gasto</label>
-            <span style="font-size:20px"><?= $this->Number->currency($ordemServico->valor_total_gasto)?></span>
+            <span style="font-size:20px"><?= "R$ ". $ordemServico->valor_total_gasto ?></span>
           </div>
           <div class="col-md-4">
             <label class="m-r-15" style="font-size:20px">Data</label>

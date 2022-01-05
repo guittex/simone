@@ -168,7 +168,6 @@
             $("#divBodyViewOrdem").append(`<p><b>Imagens: </b></p>`)
 
             $(retorno.documentos).each(function(){
-              console.log(this.arquivo);
               var extension = this.arquivo.split('.').pop();
 
               if(extension == 'pdf'){

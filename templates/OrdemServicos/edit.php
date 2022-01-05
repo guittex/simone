@@ -26,18 +26,20 @@
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <?php echo $this->Form->create($ordemServico, ['role' => 'form']); ?>
+          <?php echo $this->Form->create($ordemServico, ['role' => 'form', 'type' => 'file', 'enctype' => "multipart/form-data"]); ?>
             <div class="box-body">
               <?php
-                echo $this->Form->control('diagnostico');
-                echo $this->Form->control('solucao');
+                echo $this->Form->control('diagnostico',['label' => 'Diagnóstico']);
+                echo $this->Form->control('solucao',['label' => 'Solução']);
                 echo $this->Form->control('valor_total_gasto');
-                echo $this->Form->control('carro_id', ['options' => $carros, 'empty' => true]);
+                echo $this->Form->control('carro_id', ['options' => $carros, 'empty' => true, 'disabled' => true]);
+                echo $this->Form->hidden('carro_id');
+                echo $this->Form->control('arquivo', ['type' => 'file', 'name' => "arquivos[]", 'class' => 'form-control', 'placeholder' => "Selecione", "multiple" => "multiple"]);
               ?>
             </div>
             <!-- /.box-body -->
 
-          <?php echo $this->Form->submit(__('Submit')); ?>
+          <?php echo $this->Form->submit(__('Salvar'),['class' => "float-r btn btn-flat btn-success"]); ?>
 
           <?php echo $this->Form->end(); ?>
         </div>
@@ -46,3 +48,8 @@
   </div>
   <!-- /.row -->
 </section>
+<script>
+  $(document).ready(function(){
+    $('#valor-total-gasto').maskMoney();
+  });
+</script>
