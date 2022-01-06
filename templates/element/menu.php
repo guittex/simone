@@ -8,7 +8,7 @@
         </a>
         <ul class="treeview-menu">
             <li><a href="<?= $this->Url->build(['controller' => 'Clientes', 'action' => 'index'], ['escape' => false]) ?>"><i class="fa fa-circle-o"></i>Clientes</a></li>
-            <li><a href="<?php echo $this->Url->build('/pages/home2'); ?>"><i class="fa fa-circle-o"></i>Usuários</a></li>
+            <li><a href="<?php echo $this->Url->build('/users'); ?>"><i class="fa fa-circle-o"></i>Usuários</a></li>
             <li><a href="<?php echo $this->Url->build('/tipo-documentos'); ?>"><i class="fa fa-circle-o"></i>Tipo Documentos</a></li>
         </ul>
     </li> 

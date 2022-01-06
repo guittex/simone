@@ -19,6 +19,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\EventInterface;
 use DataTables\Controller\Component\DataTablesComponent;
+use Authentication\Controller\Component\AuthenticationComponent;
 
 /**
  * Application Controller
@@ -46,12 +47,27 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('DataTables.DataTables');
+        $this->loadComponent('Authentication.Authentication');
 
         /*
          * Enable the following component for recommended CakePHP form protection settings.
          * see https://book.cakephp.org/4/en/controllers/components/form-protection.html
          */
         //$this->loadComponent('FormProtection');
+    }
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // Configure the login action to not require authentication, preventing
+        // the infinite redirect loop issue
+        $this->Authentication->addUnauthenticatedActions(['login']);
+
+        if (isset($this->Authentication) && $this->Authentication->getIdentity()) {
+            $loguser = $this->Authentication->getIdentity()->getOriginalData();
+
+            $_SESSION['loguser'] = $loguser;
+        }
     }
 
     public function beforeRender(EventInterface  $event)
