@@ -21,6 +21,9 @@
                     <a href="#carros-aba" data-toggle="tab"><?= __('Dados do Carro') ?></a>
                 </li>
                 <li>
+                  <a href="#imagens-aba" data-toggle="tab"><?= __('Imagens do Carro') ?></a>
+                </li>
+                <li>
                   <a href="#ordem-servico-aba" data-toggle="tab"><?= __('Ordem de Serviço') ?></a>
                 </li>
                 <li>
@@ -57,6 +60,77 @@
                     <button class="btn btn-flat btn-warning float-r">Editar</button>
                   </div>
                   <?= $this->Form->end(); ?>
+                </div>
+                <div class="tab-pane" id="imagens-aba">
+                  <div class="box-header">
+                    <?= $this->Form->create(null, ['url' => ['action' => 'addImagensToCar'], 'role' => 'form', 'type' => 'file', 'enctype' => "multipart/form-data" ]) ?>
+                      <?= $this->Form->hidden("carro_id",['value' => $carro->id]) ?>
+                      <div class="col-md-4">
+                        <?= $this->Form->control("arquivo[]",[
+                          'type' => 'file',
+                          'class' => 'form-control',
+                          'required' => true,
+                          'accept' => ".jpg, .jpeg, .png",
+                          'label' => 'Imagens',
+                          'multiple' => 'multiple',
+                          'templates' => [
+                            'inputContainer' => "{{content}}"
+                          ]
+                        ]) ?>
+                      </div>
+                      <div class="col-md-3">
+                        <button class="btn btn-success btn-flat" style="margin-top:24px">Adicionar</button>
+                      </div>
+                    <?= $this->Form->end(); ?>
+                  </div>
+                  <div class="box-body">
+                  <hr>
+                  <?php foreach($imagens_carro as $key => $file) : ?>
+                      <div class="col-md-3">
+                        <div class="panel panel-default">
+                          <div class="panel-heading text-center">
+                            Imagem <?= $key + 1 ?>
+                          </div>
+                          <div class="panel-body" style="height:240px;text-align:center;overflow:auto">
+                            <?php 
+                                $type_file = pathinfo($file->arquivo, PATHINFO_EXTENSION);
+
+                                $type_images = ['png', 'PNG', 'jpg', 'JPG', 'jpeg', 'JPEG'];
+
+                                if(in_array($type_file, $type_images)){
+                                  $file = $file->arquivo;
+
+                                  $link = $this->Html->image($file, [
+                                      'target' => '_blank',
+                                      'pathPrefix' => "files/Documentos/arquivo/",
+                                      'style' => 'width:193px'
+                                  ]);
+                                  
+                                  echo $link;
+
+                                }                  
+                            ?>
+                          </div>
+                          <div class="panel-footer text-center">
+                            <?php
+                              $link_file = $this->Html->link('replace_icon', [
+                                      'controller' => "files",
+                                      'action' => "Documentos",
+                                      "arquivo",
+                                      $file
+                                    ],[
+                                      "target" => '_blank',
+                                      'download' => "Documento"
+                                    ]
+                                );
+
+                              echo str_replace("replace_icon", '<i class="fa fa-download m-r-10" style="font-size: 30px;color: #3f51b5;cursor:pointer"></i>', $link_file);
+                            ?>
+                          </div>
+                        </div>
+                      </div>
+                    <?php endforeach; ?>
+                  </div>
                 </div>
                 <div class="tab-pane" id="ordem-servico-aba">
                     <div class="box-header">
@@ -95,7 +169,7 @@
                 </div>
                 <div class="tab-pane" id="multa-aba">
                   <div class="box-body">
-
+                    
                   </div>
                 </div>
               </div>

@@ -38,7 +38,10 @@ class CarrosController extends AppController
         $ordem_servicos = $this->loadModel('OrdemServicos')->find("all")
             ->where(['carro_id' => $id]);
 
-        $this->set(compact('carro', 'ordem_servicos'));
+        $imagens_carro = $this->loadModel('Documentos')->find("all")
+            ->where(['carro_id' => $id, 'ordem_servico_id is' => null]);
+
+        $this->set(compact('carro', 'ordem_servicos', "imagens_carro"));
     }
 
 
@@ -119,5 +122,27 @@ class CarrosController extends AppController
         ]);
 
         echo json_encode($ordem);
+    }
+
+    public function addImagensToCar()
+    {
+        $this->request->allowMethod(['patch', 'post', 'put']);
+
+        $post = $this->getRequest()->getData();
+
+        if(count($post['arquivo']) >= 1){
+            for ($i=0; $i < count($post['arquivo']); $i++) { 
+                $documento = $this->loadModel('Documentos')->newEmptyEntity();
+                $documento->arquivo = $post['arquivo'][$i];
+                $documento->carro_id = $post['carro_id'];
+                $documento = $this->loadModel('Documentos')->patchEntity($documento, []);
+
+                $this->loadModel('Documentos')->save($documento);               
+            }
+        }
+
+        $this->Flash->success(__('Imagens adicionada com sucesso'));
+
+        return $this->redirect(['action' => 'view', $post['carro_id'] ]);
     }
 }
