@@ -55,6 +55,17 @@
                     <div class="col-md-3">
                       <?= $this->Form->control('cor',['placeholder' => 'Digite...']); ?>
                     </div>
+                    <div class="col-md-3">
+                      <?= $this->Form->control('km_total_mensal',['placeholder' => 'Digite...', 'label' => 'KM Total Mensal']); ?>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="pretty p-switch p-fill p-bigger m-t-35">
+                          <input type="checkbox" name="alugado" <?= $carro->alugado ? "checked" : "" ?> value="<?= $carro->alugado ?>" />
+                          <div class="state p-success">
+                              <label style="font-weight:700!important">Alugado</label>
+                          </div>
+                      </div>
+                    </div>  
                   </div>
                   <div class="box-footer">
                     <button class="btn btn-flat btn-warning float-r">Editar</button>

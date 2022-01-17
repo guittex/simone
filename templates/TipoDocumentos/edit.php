@@ -33,7 +33,7 @@
                 <div class="pretty p-switch p-fill p-bigger m-t-35">
                     <input type="checkbox" name="obrigatorio" <?= $tipoDocumento->obrigatorio ? "checked" : "" ?> value="<?= $tipoDocumento->obrigatorio ?>" />
                     <div class="state p-success">
-                        <label>Documento Obrigatório</label>
+                        <label>Documento obrigatório para solicitação de aluguel</label>
                     </div>
                 </div>
               </div>          

@@ -52,6 +52,8 @@ $routes->scope('/', function (RouteBuilder $builder) {
      */
     $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
 
+    $builder->connect('/webroot/solicitacoes', ['controller' => 'Solicitacoes', 'action' => 'index']);
+
     /*
      * ...and connect the rest of 'Pages' controller's URLs.
      */

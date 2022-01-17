@@ -65,6 +65,13 @@ use App\Model\Entity\Endereco;
                       ]) ?>
                   </div>    
                   <div class="col-md-4">
+                      <?= $this->Form->control('email',[
+                        'value' => $cliente->email,
+                        'label' => 'E-mail',
+                        'class' => 'form-control'
+                      ]) ?>
+                  </div>
+                  <div class="col-md-4">
                     <?= $this->Form->control('data_nascimento',[
                         'value' => $cliente->data_nascimento,
                         'label' => 'Data de Nascimento',
@@ -197,6 +204,51 @@ use App\Model\Entity\Endereco;
                       </div>
                     </div>
                   <?php endforeach; ?>
+
+                  <!-- Documentos da solicitação -->
+                  <?php if(count($documentos_solicitacoes->toArray()) >= 1) : ?>
+                    <div class="col-md-12">
+                      <h3>Documentos da Solicitação:</h3>
+                      <hr>
+                    </div>
+                    <?php foreach($documentos_solicitacoes as $key => $doc_solicitacao) : ?>
+                      <div class="col-md-3">
+                        <div class="panel panel-default">
+                          <div class="panel-heading text-center">
+                            <?= $doc_solicitacao->tipo_documento->nome ?>
+                          </div>
+                          <div class="panel-body" style="height:175px;text-align:center;overflow:auto">
+                            <?php 
+                                $file = $doc_solicitacao->arquivo;
+
+                                $link = $this->Html->image($file, [
+                                    'target' => '_blank',
+                                    'pathPrefix' => "files/Documentos/arquivo/",
+                                    'style' => 'width:193px'
+                                ]);
+                                
+                                echo $link;                              
+                            ?>
+                          </div>
+                          <div class="panel-footer text-center">
+                            <?php
+                              $link_file = $this->Html->link('replace_icon', [
+                                      'controller' => "files",
+                                      'action' => "Documentos",
+                                      "arquivo",
+                                      $file
+                                    ],[
+                                      "target" => '_blank',
+                                      'download' => "Documento"
+                                    ]
+                                );
+                              echo str_replace("replace_icon", '<i class="fa fa-download m-r-10" style="font-size: 30px;color: #3f51b5;cursor:pointer"></i>', $link_file);
+                            ?>
+                          </div>
+                        </div>
+                      </div>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
                 </div>
               </div>
               <!-- ---------- Aba Telefones --------------->

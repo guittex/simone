@@ -24,6 +24,7 @@ class Cliente extends Entity
      */
     protected $_accessible = [
         'nome' => true,
+        'email' => true,
         'rg' => true,
         'cpf' => true,
         'cnh' => true,

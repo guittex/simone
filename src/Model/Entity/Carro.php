@@ -31,9 +31,11 @@ class Carro extends Entity
     protected $_accessible = [
         'modelo' => true,
         'marca' => true,
+        'alugado' => true,
         'tipo' => true,
         'placa' => true,
         'cor' => true,
+        'km_total_mensal' => true,
         'created' => true,
         'modified' => true,
     ];

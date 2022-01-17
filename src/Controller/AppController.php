@@ -61,13 +61,14 @@ class AppController extends Controller
         parent::beforeFilter($event);
         // Configure the login action to not require authentication, preventing
         // the infinite redirect loop issue
-        $this->Authentication->addUnauthenticatedActions(['login']);
+        $this->Authentication->addUnauthenticatedActions(['login', 'solicitacoes', 'saveSolicitation', 'anexarDocumentos', 'sendAnexos']);
 
         if (isset($this->Authentication) && $this->Authentication->getIdentity()) {
             $loguser = $this->Authentication->getIdentity()->getOriginalData();
 
             $_SESSION['loguser'] = $loguser;
         }
+
     }
 
     public function beforeRender(EventInterface  $event)

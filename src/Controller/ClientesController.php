@@ -56,10 +56,15 @@ class ClientesController extends AppController
                     ] 
                 ]
             ]);
-       
+
+        $documentos_solicitacoes = $this->loadModel("Documentos")->find("all")
+            ->where(['Documentos.cliente_id' => $id, 'solicitacao_id is not' => null])
+            ->contain("TipoDocumentos");
+      
         $this->set(compact(
             'cliente', 
             'telefone', 
+            'documentos_solicitacoes',
             'endereco', 
             'enderecosCliente', 
             'telefonesCliente', 

@@ -73,6 +73,9 @@ class DocumentosTable extends Table
         $this->belongsTo('Carros', [
             'foreignKey' => 'carro_id',
         ]);
+        $this->belongsTo('Solicitacoes', [
+            'foreignKey' => 'solicitacao_id',
+        ]);
         $this->belongsTo('TipoDocumentos', [
             'foreignKey' => 'tipo_documento_id',
         ]);

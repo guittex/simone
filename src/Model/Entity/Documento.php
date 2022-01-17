@@ -38,6 +38,7 @@ class Documento extends Entity
         'tipo_documento_id' => true,
         'cliente' => true,
         'tipo_documento' => true,
+        'solicitacao_id' => true,
         'deleted' => true,
         'carro_id' => true
     ];
