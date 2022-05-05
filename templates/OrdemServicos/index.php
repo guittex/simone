@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
   <h1>
-    Ordem Servicos
+    Ordem Serviços
     <div class="pull-right"><?php echo $this->Html->link(__('Adicionar'), ['action' => 'add'], ['class'=>'btn btn-flat btn-success btn-add-head']) ?></div>
   </h1>
 </section>

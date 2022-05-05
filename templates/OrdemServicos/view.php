@@ -1,7 +1,7 @@
 <section class="content-header">
   <h1>
-    Ordem Servico
-    <small><?php echo __('View'); ?></small>
+    Ordem Serviços
+    <small><?php echo __('Visualização'); ?></small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="<?php echo $this->Url->build(['action' => 'index']); ?>" style="font-size:20px"><i class="fa fa-arrow-left" style="color:#03a9f4"></i> <?php echo __('Voltar'); ?></a></li>
@@ -55,7 +55,7 @@
       <div class="box box-solid">
         <div class="box-header with-border">
           <i class="fa fa-text-width"></i>
-          <h3 class="box-title"><?= __('Solucao') ?></h3>
+          <h3 class="box-title"><?= __('Solução') ?></h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">

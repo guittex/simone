@@ -7,8 +7,8 @@
 <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Ordem Servico
-      <small><?php echo __('Edit'); ?></small>
+      Ordem Serviços
+      <small><?php echo __('Edição'); ?></small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo $this->Url->build(['action' => 'index']); ?>"><i class="fa fa-dashboard"></i> <?php echo __('Home'); ?></a></li>
@@ -22,7 +22,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title"><?php echo __('Form'); ?></h3>
+            <h3 class="box-title"><?php echo __('Formulário'); ?></h3>
           </div>
           <!-- /.box-header -->
           <!-- form start -->

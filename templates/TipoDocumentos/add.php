@@ -8,7 +8,7 @@
   <section class="content-header">
     <h1>
       Tipo de Documento
-      <small><?php echo __('Adicionar'); ?></small>
+      <small><?php echo __('Adição'); ?></small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="<?php echo $this->Url->build(['action' => 'index']); ?>"><i class="fa fa-dashboard"></i> <?php echo __('Home'); ?></a></li>

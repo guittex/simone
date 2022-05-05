@@ -1,7 +1,7 @@
 <section class="content-header">
   <h1>
     Carro
-    <small><?php echo __('Visualizar'); ?></small>
+    <small><?php echo __('Visualização'); ?></small>
   </h1>
   <ol class="breadcrumb">
     <li><a href="<?php echo $this->Url->build(['action' => 'index']); ?>" style="font-size:20px"><i class="fa fa-arrow-left" style="color:#03a9f4"></i> <?php echo __('Voltar'); ?></a></li>
