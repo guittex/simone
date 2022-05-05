@@ -42,8 +42,115 @@
 
   <?php echo $this->Html->css('AdminLTE./plugins/select2/select2.css'); ?>
 
+  <?= 
+    $this->Html->css([
+        'AdminLTE./plugins/datatables/extensions/Responsive/css/responsive.dataTables.min.css',
+        'AdminLTE./plugins/datatables/extensions/RowReorder/css/rowReorder.dataTables.min.css',
+        'AdminLTE./plugins/datatables/dataTables.bootstrap',
+        'AdminLTE./plugins/datatables/extensions/buttons/buttons.dataTables.min',
+    ]);
+  ?>
+
 </head>
 <body class="hold-transition skin-<?php echo Configure::read('Theme.skin'); ?> sidebar-mini">
+  <style>
+      .select2-container--default.select2-container--focus,
+    .select2-selection.select2-container--focus,
+    .select2-container--default:focus,
+    .select2-selection:focus,
+    .select2-container--default:active,
+    .select2-selection:active {
+      outline: none;
+    }
+    .select2-container--default .select2-selection--single,
+    .select2-selection .select2-selection--single {
+      border: 1px solid #d2d6de;
+      border-radius: 0;
+      padding: 6px 12px;
+      height: 34px;
+    }
+    .select2-container--default.select2-container--open {
+      border-color: #3c8dbc;
+    }
+    .select2-dropdown {
+      border: 1px solid #d2d6de;
+      border-radius: 0;
+    }
+    .select2-container--default .select2-results__option--highlighted[aria-selected] {
+      background-color: #3c8dbc;
+      color: white;
+    }
+    .select2-results__option {
+      padding: 6px 12px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      padding-left: 0;
+      padding-right: 0;
+      height: auto;
+      margin-top: -4px;
+    }
+    .select2-container[dir="rtl"] .select2-selection--single .select2-selection__rendered {
+      padding-right: 6px;
+      padding-left: 20px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+      height: 28px;
+      right: 3px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+      margin-top: 0;
+    }
+    .select2-dropdown .select2-search__field,
+    .select2-search--inline .select2-search__field {
+      border: 1px solid #d2d6de;
+    }
+    .select2-dropdown .select2-search__field:focus,
+    .select2-search--inline .select2-search__field:focus {
+      outline: none;
+    }
+    .select2-container--default.select2-container--focus .select2-selection--multiple,
+    .select2-container--default .select2-search--dropdown .select2-search__field {
+      border-color: #3c8dbc !important;
+    }
+    .select2-container--default .select2-results__option[aria-disabled=true] {
+      color: #999;
+    }
+    .select2-container--default .select2-results__option[aria-selected=true] {
+      background-color: #ddd;
+    }
+    .select2-container--default .select2-results__option[aria-selected=true],
+    .select2-container--default .select2-results__option[aria-selected=true]:hover {
+      color: #444;
+    }
+    .select2-container--default .select2-selection--multiple {
+      border: 1px solid #d2d6de;
+      border-radius: 0;
+    }
+    .select2-container--default .select2-selection--multiple:focus {
+      border-color: #3c8dbc;
+    }
+    .select2-container--default.select2-container--focus .select2-selection--multiple {
+      border-color: #d2d6de;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice {
+      background-color: #3c8dbc;
+      border-color: #367fa9;
+      padding: 1px 10px;
+      color: #fff;
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+      margin-right: 5px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+    .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+      color: #fff;
+    }
+    .select2-container .select2-selection--single .select2-selection__rendered {
+      padding-right: 10px;
+    }
+  </style>
 <div class="wrapper">
 
   <header class="main-header">
@@ -92,6 +199,23 @@
 <?php echo $this->Html->script('AdminLTE./bower_components/jquery-slimscroll/jquery.slimscroll.min'); ?>
 <!-- FastClick -->
 <?php echo $this->Html->script('AdminLTE./bower_components/fastclick/lib/fastclick'); ?>
+
+<?= 
+  $this->Html->script([
+      'AdminLTE./plugins/datatables/jquery.dataTables.min',
+      'AdminLTE./plugins/datatables/extensions/buttons/dataTables.buttons.min',
+      'AdminLTE./plugins/datatables/extensions/ajax/jszip/jszip.min',
+      'AdminLTE./plugins/datatables/extensions/ajax/pdfmake/pdfmake.min',
+      'AdminLTE./plugins/datatables/extensions/ajax/pdfmake/vfs_fonts',
+      'AdminLTE./plugins/datatables/extensions/buttons/buttons.html5.min',
+      'AdminLTE./plugins/datatables/extensions/buttons/buttons.print.min',
+      'AdminLTE./plugins/datatables/dataTables.bootstrap.min',
+      'AdminLTE./plugins/datatables/extensions/Responsive/js/dataTables.responsive.min',
+      'AdminLTE./plugins/datatables/extensions/RowReorder/js/dataTables.rowReorder.min',
+  ]);
+?>
+
+<?php echo $this->Html->script('dataTable'); ?>
 
 <?php echo $this->fetch('script'); ?>
 
