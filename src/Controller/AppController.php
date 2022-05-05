@@ -67,6 +67,16 @@ class AppController extends Controller
             $loguser = $this->Authentication->getIdentity()->getOriginalData();
 
             $_SESSION['loguser'] = $loguser;
+
+            $carros_total = $this->loadModel("Carros")->find("all")->count();
+
+            $clientes_total = $this->loadModel("Clientes")->find("all")->count();
+
+            $os_total = $this->loadModel("OrdemServicos")->find("all")->count();
+
+            $solicitacao_aluguel_total = $this->loadModel("OrdemServicos")->find("all")->count();
+
+            $this->set(compact(['carros_total', 'clientes_total', 'os_total', 'solicitacao_aluguel_total']));
         }
 
     }
