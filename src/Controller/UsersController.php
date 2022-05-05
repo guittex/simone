@@ -34,8 +34,9 @@ class UsersController extends AppController
     public function logout()
     {
         $result = $this->Authentication->getResult();
-        // regardless of POST or GET, redirect if user is logged in
+
         if ($result->isValid()) {
+            unset($_SESSION['loguser']);
             $this->Authentication->logout();
             return $this->redirect(['controller' => 'Users', 'action' => 'login']);
         }
@@ -132,4 +133,6 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    
 }

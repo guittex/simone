@@ -291,7 +291,17 @@ return [
              * For MariaDB/MySQL the internal default changed from utf8 to utf8mb4, aka full utf-8 support, in CakePHP 3.6
              */
             //'encoding' => 'utf8mb4',
+            'host' => 'homologacao2.c0scxlnittmu.sa-east-1.rds.amazonaws.com',
+            /*
+             * CakePHP will use the default DB port based on the driver selected
+             * MySQL on MAMP uses port 8889, MAMP users will want to uncomment
+             * the following line and set the port accordingly
+             */
+            //'port' => 'non_standard_port_number',
 
+            'username' => 'guilhermeO',
+            'password' => '39437063',
+            'database' => 'guilherme',
             /*
              * If your MySQL server is configured with `skip-character-set-client-handshake`
              * then you MUST use the `flags` config to set your charset encoding.

@@ -138,14 +138,14 @@ class SolicitacoesController extends AppController
             ->setTo($cliente->email)
             ->setSubject('Temos uma novidade para você');
 
-        try {
+        // try {
             $email->send($textMail);
 
-        } catch (\Cake\Network\Exception\SocketException $exception) {
-            $this->Flash->error(__('Erro não previsto, favor contatar o administrador'));
+        // } catch (\Cake\Network\Exception\SocketException $exception) {
+        //     $this->Flash->error(__('Erro não previsto, favor contatar o administrador'));
 
-            return $this->redirect(['action' => 'view', $solicitacao_id]);
-        }
+        //     return $this->redirect(['action' => 'view', $solicitacao_id]);
+        // }
 
         $solicitacao = $this->Solicitacoes->get($solicitacao_id);
 

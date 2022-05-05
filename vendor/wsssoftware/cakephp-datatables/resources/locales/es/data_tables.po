@@ -1,0 +1,155 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-05-02 22:53+0000\n"
+"PO-Revision-Date: 2020-05-02 19:54-0300\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#: Controller/ProviderController.php:63
+msgid "{0} activate to sort column ascending"
+msgstr "{0} Activar para ordenar la columna de manera ascendente"
+
+#: Controller/ProviderController.php:64
+msgid "{0} activate to sort column descending"
+msgstr "{0} Activar para ordenar la columna de manera descendente"
+
+#: Controller/ProviderController.php:66
+msgid "No data available in table"
+msgstr "Ningún dato disponible en esta tabla"
+
+#: Controller/ProviderController.php:67 Controller/ProviderController.php:68
+msgid "Showing {0} to {1} of {2} entries"
+msgstr "Mostrando registros del {0} al {1} de un total de {2} registros"
+
+#: Controller/ProviderController.php:69
+msgid "filtered from {0} total entries"
+msgstr "filtrado de un total de {0} registros"
+
+#: Controller/ProviderController.php:70
+msgid "Show {0} entries"
+msgstr "Mostrar {0} registros"
+
+#: Controller/ProviderController.php:71 View/Cell/DataTablesCell.php:36
+msgid "Loading"
+msgstr "Cargando"
+
+#: Controller/ProviderController.php:73
+msgid "Next"
+msgstr "Siguiente"
+
+#: Controller/ProviderController.php:74
+msgid "Previous"
+msgstr "Anterior"
+
+#: Controller/ProviderController.php:75
+msgid "First"
+msgstr "Primero"
+
+#: Controller/ProviderController.php:76
+msgid "Last"
+msgstr "Último"
+
+#: Controller/ProviderController.php:78
+msgid "Processing"
+msgstr "Procesando"
+
+#: Controller/ProviderController.php:79
+msgid "Search:"
+msgstr "Buscar:"
+
+#: Controller/ProviderController.php:80
+msgid "No matching records found"
+msgstr "No se encontraron resultados"
+
+#: Controller/ProviderController.php:82
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: Controller/ProviderController.php:83
+msgid "Fill all cells with {0}"
+msgstr "Llenar todas las celdas con {0}"
+
+#: Controller/ProviderController.php:84
+msgid "Fill cells horizontally"
+msgstr "Llenar celdas horizontalmente"
+
+#: Controller/ProviderController.php:85
+msgid "Fill cells vertically"
+msgstr "Llenar celdas verticalmente"
+
+#: Controller/ProviderController.php:86
+msgid "Increment / decrement each cell by: {0}"
+msgstr "Incremento / disminución de cada celda por: {0}"
+
+#: Table/Renderer.php:107
+msgid "NOT CONFIGURED YET"
+msgstr "AÚN NO CONFIGURADO"
+
+#: Table/Renderer.php:111
+msgid "this column data was auto generated."
+msgstr "estos datos de columna se generaron automáticamente."
+
+#: View/Cell/DataTablesCell.php:40
+msgid "Loading {0} data"
+msgstr "Carga de datos {0}"
+
+#~ msgid "No searchPanes"
+#~ msgstr "Sin searchPanes"
+
+#~ msgid "Filters Selected - {0}"
+#~ msgstr "Filtros seleccionados - {0}"
+
+#~ msgid "No Filters Selected"
+#~ msgstr "No se han seleccionado filtros"
+
+#~ msgid "One Filter Selected"
+#~ msgstr "Un filtro seleccionado"
+
+#~ msgid "Selected {0} cells"
+#~ msgstr "Celdas {0} seleccionadas"
+
+#~ msgid "Click a cell to select it"
+#~ msgstr "Haga clic en una celda para seleccionarla"
+
+#~ msgid "Selected 1 cell"
+#~ msgstr "Seleccionado 1 celda"
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "Search records"
+#~ msgstr "Buscar registros"
+
+#~ msgid ","
+#~ msgstr ","
+
+#~ msgid "Go!"
+#~ msgstr "¡Vamos!"
+
+#~ msgid "Select a data fill type:"
+#~ msgstr "Seleccione un tipo de relleno de datos:"
+
+#~ msgid "Copy"
+#~ msgstr "Copiar"
+
+#~ msgid "Visibility"
+#~ msgstr "Visibilidad"
+
+#~ msgid "{0} found"
+#~ msgstr "{0} encontrado"
+
+#~ msgid "{0} ({1})"
+#~ msgstr "{0}: {1}"
+
+#~ msgid "loading"
+#~ msgstr "Cargando"

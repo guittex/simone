@@ -1,0 +1,106 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-05-02 22:53+0000\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: Controller/ProviderController.php:63
+msgid "{0} activate to sort column ascending"
+msgstr ""
+
+#: Controller/ProviderController.php:64
+msgid "{0} activate to sort column descending"
+msgstr ""
+
+#: Controller/ProviderController.php:66
+msgid "No data available in table"
+msgstr ""
+
+#: Controller/ProviderController.php:67
+#: Controller/ProviderController.php:68
+msgid "Showing {0} to {1} of {2} entries"
+msgstr ""
+
+#: Controller/ProviderController.php:69
+msgid "filtered from {0} total entries"
+msgstr ""
+
+#: Controller/ProviderController.php:70
+msgid "Show {0} entries"
+msgstr ""
+
+#: Controller/ProviderController.php:71
+#: View/Cell/DataTablesCell.php:36
+msgid "Loading"
+msgstr ""
+
+#: Controller/ProviderController.php:73
+msgid "Next"
+msgstr ""
+
+#: Controller/ProviderController.php:74
+msgid "Previous"
+msgstr ""
+
+#: Controller/ProviderController.php:75
+msgid "First"
+msgstr ""
+
+#: Controller/ProviderController.php:76
+msgid "Last"
+msgstr ""
+
+#: Controller/ProviderController.php:78
+msgid "Processing"
+msgstr ""
+
+#: Controller/ProviderController.php:79
+msgid "Search:"
+msgstr ""
+
+#: Controller/ProviderController.php:80
+msgid "No matching records found"
+msgstr ""
+
+#: Controller/ProviderController.php:82
+msgid "Cancel"
+msgstr ""
+
+#: Controller/ProviderController.php:83
+msgid "Fill all cells with {0}"
+msgstr ""
+
+#: Controller/ProviderController.php:84
+msgid "Fill cells horizontally"
+msgstr ""
+
+#: Controller/ProviderController.php:85
+msgid "Fill cells vertically"
+msgstr ""
+
+#: Controller/ProviderController.php:86
+msgid "Increment / decrement each cell by: {0}"
+msgstr ""
+
+#: Table/Renderer.php:107
+msgid "NOT CONFIGURED YET"
+msgstr ""
+
+#: Table/Renderer.php:111
+msgid "this column data was auto generated."
+msgstr ""
+
+#: View/Cell/DataTablesCell.php:40
+msgid "Loading {0} data"
+msgstr ""
+

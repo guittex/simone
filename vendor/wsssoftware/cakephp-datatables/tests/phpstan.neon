@@ -1,0 +1,9 @@
+parameters:
+	level: 8
+	autoload_files:
+		- bootstrap.php
+	checkMissingIterableValueType: false
+	checkGenericClassInNonGenericObjectType: false
+	ignoreErrors:
+		- '#Property DataTables\\Table\\ConfigBundle::\$Options#'
+		- '#Property DataTables\\Table\\ConfigBundle::\$Query#'

@@ -20,7 +20,7 @@
     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 </div>
 <div class="form-group has-feedback">
-    <?= $this->Form->control('password', ['name' => 'password', 'label' => false, 'class' => 'form-control', 'placeholder' => __('Password')]) ?>
+    <?= $this->Form->control('password', ['name' => 'password', 'label' => false, 'class' => 'form-control', 'placeholder' => __('Senha')]) ?>
     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 </div>
 <div class="row">

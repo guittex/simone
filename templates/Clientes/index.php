@@ -46,7 +46,4 @@
     </div>
   </div>
 </section>
-<?php
-
-
-?>
+<?= $this->element("footer2"); ?>

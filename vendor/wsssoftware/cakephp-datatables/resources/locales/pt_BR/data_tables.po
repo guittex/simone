@@ -1,0 +1,155 @@
+# LANGUAGE translation of CakePHP Application
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2020-05-02 22:53+0000\n"
+"PO-Revision-Date: 2020-05-02 19:54-0300\n"
+"Last-Translator: \n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3\n"
+
+#: Controller/ProviderController.php:63
+msgid "{0} activate to sort column ascending"
+msgstr "{0} ordenar colunas de forma ascendente"
+
+#: Controller/ProviderController.php:64
+msgid "{0} activate to sort column descending"
+msgstr "{0} ordenar colunas de forma descendente"
+
+#: Controller/ProviderController.php:66
+msgid "No data available in table"
+msgstr "Nenhum registro encontrado"
+
+#: Controller/ProviderController.php:67 Controller/ProviderController.php:68
+msgid "Showing {0} to {1} of {2} entries"
+msgstr "Mostrando de {0} até {1} de {2} registros"
+
+#: Controller/ProviderController.php:69
+msgid "filtered from {0} total entries"
+msgstr "filtrados de {0} registros"
+
+#: Controller/ProviderController.php:70
+msgid "Show {0} entries"
+msgstr "{0} resultados por página"
+
+#: Controller/ProviderController.php:71 View/Cell/DataTablesCell.php:36
+msgid "Loading"
+msgstr "Carregando"
+
+#: Controller/ProviderController.php:73
+msgid "Next"
+msgstr "Próximo"
+
+#: Controller/ProviderController.php:74
+msgid "Previous"
+msgstr "Anterior"
+
+#: Controller/ProviderController.php:75
+msgid "First"
+msgstr "Primeiro"
+
+#: Controller/ProviderController.php:76
+msgid "Last"
+msgstr "Último"
+
+#: Controller/ProviderController.php:78
+msgid "Processing"
+msgstr "Processando"
+
+#: Controller/ProviderController.php:79
+msgid "Search:"
+msgstr "Pesquisar:"
+
+#: Controller/ProviderController.php:80
+msgid "No matching records found"
+msgstr "Nenhum registro encontrado"
+
+#: Controller/ProviderController.php:82
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: Controller/ProviderController.php:83
+msgid "Fill all cells with {0}"
+msgstr "Encha todas as células com {0}"
+
+#: Controller/ProviderController.php:84
+msgid "Fill cells horizontally"
+msgstr "Encha células horizontalmente"
+
+#: Controller/ProviderController.php:85
+msgid "Fill cells vertically"
+msgstr "Preencha as células verticalmente"
+
+#: Controller/ProviderController.php:86
+msgid "Increment / decrement each cell by: {0}"
+msgstr "Incremento / decrementar de cada célula por: {0}"
+
+#: Table/Renderer.php:107
+msgid "NOT CONFIGURED YET"
+msgstr "NÃO CONFIGURADO AINDA"
+
+#: Table/Renderer.php:111
+msgid "this column data was auto generated."
+msgstr "estes dados da coluna foram gerados automaticamente."
+
+#: View/Cell/DataTablesCell.php:40
+msgid "Loading {0} data"
+msgstr "Carregando dados de {0}"
+
+#~ msgid "No searchPanes"
+#~ msgstr "Sem searchPanes"
+
+#~ msgid "Filters Selected - {0}"
+#~ msgstr "Filtros selecionados - {0}"
+
+#~ msgid "No Filters Selected"
+#~ msgstr "Sem filtros selecionados"
+
+#~ msgid "One Filter Selected"
+#~ msgstr "Um filtro selecionado"
+
+#~ msgid "Selected {0} cells"
+#~ msgstr "Selecionado {0} linhas"
+
+#~ msgid "Click a cell to select it"
+#~ msgstr "Nenhuma linha selecionada"
+
+#~ msgid "Selected 1 cell"
+#~ msgstr "Selecionado 1 linha"
+
+#~ msgid "."
+#~ msgstr ","
+
+#~ msgid "Search records"
+#~ msgstr "Buscar registros"
+
+#~ msgid ","
+#~ msgstr "."
+
+#~ msgid "Go!"
+#~ msgstr "Ir!"
+
+#~ msgid "Select a data fill type:"
+#~ msgstr "Selecione um tipo de preenchimento de dados:"
+
+#~ msgid "Copy"
+#~ msgstr "Copiar"
+
+#~ msgid "Visibility"
+#~ msgstr "Visibilidade"
+
+#~ msgid "{0} found"
+#~ msgstr "{0} encontrado"
+
+#~ msgid "{0} ({1})"
+#~ msgstr "{0} ({1})"
+
+#~ msgid "loading"
+#~ msgstr "carregando"

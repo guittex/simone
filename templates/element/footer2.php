@@ -7,7 +7,7 @@ $this->Html->css(
     'AdminLTE./plugins/datatables/dataTables.bootstrap',
     'AdminLTE./plugins/datatables/extensions/buttons/buttons.dataTables.min',
 ],
-['block' => 'css']
+['block' => 'css2']
 );
 
 $this->Html->script(
@@ -23,7 +23,7 @@ $this->Html->script(
     'AdminLTE./plugins/datatables/extensions/Responsive/js/dataTables.responsive.min',
     'AdminLTE./plugins/datatables/extensions/RowReorder/js/dataTables.rowReorder.min',
 ],
-['block' => 'script']
+['block' => 'script2']
 );
 
 echo $this->Html->script('dataTable');
